@@ -15,10 +15,16 @@
     <script src="./script.js"></script>
 </head>
 
-<body onload="render()">
-    <div id="pokedex" class="pokedex">
+<body onload="init()">
+    <header class="border-spacing">
+        <h1>Pokédex</h1>
+        <input type="text" id="search-input" onkeyup="filterPokemon()" placeholder="Search Pokemon by Name">
+    </header>
+    <div id="pokedex-render-container" class="pokedex-render-container border-spacing">
         <!-- Pokemon are rendered here -->
     </div>
+
+    <button onclick="loadMorePokemon()">Load More</button>
 </body>
 
 </html>
