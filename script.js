@@ -41,16 +41,56 @@ function renderPokemon() {
 
     for (let i = 0; i < pokemon.length; i++) {
         container.innerHTML += `
-			<div class="pokedex-card">
+			<div class="pokedex-card" onclick="${showPokemonDetails(i)}"> 
 				<div class="pokedex-card-header">
+                    <span class="pokemon-id">#${pokemon[i]['id']}</span>
 					<img src="${pokemon[i]['sprites']['other']['dream_world']['front_default']}" class="pokemon-img">
 				</div>
 				<div class="pokedex-card-body">
-					<p>ID: ${pokemon[i]['id']} Name: ${pokemon[i]['name']}</p>
+			        <span>Name: ${pokemon[i]['name']}</span>
+                    <span>Type: ${getPokemonType1(i)}</span>
+                    <span>Type: ${getPokemonType2(i)}</span>
 				</div>
 			</div>
 		`;
     }
+}
+
+function getPokemonType1(i) {
+    if (pokemon[i]['types'][0]) {
+        return pokemon[i]['types'][0]['type']['name'];
+    } else {
+        return '';
+    }
+}
+
+function getPokemonType2(i) {
+    if (pokemon[i]['types'][1]) {
+        return pokemon[i]['types'][1]['type']['name'];
+    } else {
+        return '';
+    }
+}
+
+// TODO Fix bug bc function gets called without event in line 44
+function showPokemonDetails(i) {
+    let container = document.getElementById('pokemon-details-container');
+    container.classList.remove('d-none');
+    container.innerHTML = `
+        <div>
+            <div class="pokemon-details-header">
+                <button onclick="closePokemonDetails()">Close</button>
+            </div>
+            <div class="pokemon-details-body">
+            </div>
+        </div>
+    `;
+
+}
+
+function closePokemonDetails() {
+    let container = document.getElementById('pokemon-details-container');
+    container.classList.remove('d-none');
 }
 
 function loadMorePokemon() {
