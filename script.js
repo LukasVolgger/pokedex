@@ -41,7 +41,7 @@ function renderPokemon() {
 
     for (let i = 0; i < pokemon.length; i++) {
         container.innerHTML += `
-			<div class="pokedex-card" onclick="${showPokemonDetails(i)}"> 
+			<div class="pokedex-card" onclick="showPokemonDetails(${i})"> 
 				<div class="pokedex-card-header">
                     <span class="pokemon-id">#${pokemon[i]['id']}</span>
 					<img src="${pokemon[i]['sprites']['other']['dream_world']['front_default']}" class="pokemon-img">
