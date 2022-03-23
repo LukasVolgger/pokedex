@@ -114,31 +114,6 @@ function loadMorePokemon() {
     init();
 }
 
-// function filterPokemon() {
-//     let searchText = document.getElementById('search-input').value.toLowerCase();
-//     console.log(searchText);
-
-//     let container = document.getElementById('pokedex-render-container');
-//     container.innerHTML = '';
-
-//     for (let i = 0; i < pokemon.length; i++) {
-
-//         if (pokemon[i]['name'].toLowerCase().includes(searchText)) {
-// container.innerHTML += `
-// 	<div class="pokedex-card">
-// 		<div class="pokedex-card-header">
-// 			<img src="${pokemon[i]['sprites']['other']['dream_world']['front_default']}" class="pokemon-img">
-// 		</div>
-// 		<div class="pokedex-card-body">
-// 			<p>ID: ${pokemon[i]['id']} Name: ${pokemon[i]['name']}</p>
-// 		</div>
-// 	</div>
-
-// `;
-//         }
-//     }
-// }
-
 async function filterPokemon() {
     let searchText = document.getElementById('search-input').value.toLowerCase();
     console.log(searchText);
