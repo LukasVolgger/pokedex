@@ -13,13 +13,16 @@
     <link rel="stylesheet" href="./style.css">
     <!-- Import Google Fonts END -->
     <script src="./script.js"></script>
+    <script src="./templates.js"></script>
 </head>
 
 <body onload="init()">
     <header class="border-spacing">
         <h1>Pokédex</h1>
         <div class="search-bar">
-            <img src="img/pokeball.png" alt="Pokeball" onclick="filterPokemon()">
+            <button class="search-btn" onclick="filterPokemon()">
+                <img src="img/pokeball.png" alt="Pokeball">
+            </button>
             <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon by Name">
         </div>
     </header>

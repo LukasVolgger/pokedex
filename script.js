@@ -1,52 +1,51 @@
 'use strict';
 
-let offset = 0; // Starting point
+// Pagination Settings
+let offset = 0;
 let limit = 25;
-let numberOfAllPokemon = 1126;
 
-let allPokemonNames = [];
-let searchedPokemon = [];
-let pokemon = []; // Global array to store fetched Pokemon
+// All Pokemon names and url 
+let numberOfAllPokemon = 1126;
+let allPokemonNamesAndUrl = [];
+
+// Save Pokemons
+let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
+let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
 
 function init() {
-    loadPokemonAPI();
-    loadAllPokemon();
+    loadPokemonPagination();
+    loadAllPokemonNamesAndUrl();
 }
 
-async function loadAllPokemon() {
+async function loadAllPokemonNamesAndUrl() {
     const url = `https://pokeapi.co/api/v2/pokemon/?limit=${numberOfAllPokemon}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
-    console.log('All Pokemon: ', responseJSON);
+    // console.log('All Pokemon: ', responseJSON);
 
-    getAllPokemon(responseJSON);
-}
-
-function getAllPokemon(responseJSON) {
+    // Push all fetched names and Url's into an array
     for (let i = 0; i < responseJSON['results'].length; i++) {
-        allPokemonNames.push(responseJSON['results'][i]);
+        allPokemonNamesAndUrl.push(responseJSON['results'][i]);
     }
 }
 
-async function loadPokemonAPI() {
+async function loadPokemonPagination() {
     const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
 
-    console.log('Response API JSON: ', responseJSON);
-    console.log('Response API JSON results: ', responseJSON['results']);
-    getPokemon(responseJSON);
+    // console.log('Response API JSON: ', responseJSON);
+    // console.log('Response API JSON results: ', responseJSON['results']);
+    getPokemonForPagination(responseJSON);
 }
 
-async function getPokemon(responseJSON) {
+async function getPokemonForPagination(responseJSON) {
     for (let i = 0; i < responseJSON['results'].length; i++) {
         const url = responseJSON['results'][i]['url'];
         const responseSinglePokemon = await fetch(url);
         const responseSinglePokemonJSON = await responseSinglePokemon.json();
 
-        // console.log(`Response single Pokemon ID. ${i + 1} JSON:`, responseSinglePokemonJSON);
-
-        pokemon.push(responseSinglePokemonJSON); // Push all Pokemon in global array - After every recall +offset
+        loadedPokemon.push(responseSinglePokemonJSON); // Push all Pokemon in global array - After every recall +offset
     }
 
     renderPokemon();
@@ -56,34 +55,22 @@ function renderPokemon() {
     let container = document.getElementById('pokedex-render-container');
     container.innerHTML = '';
 
-    for (let i = 0; i < pokemon.length; i++) {
-        container.innerHTML += `
-			<div class="pokedex-card" onclick="showPokemonDetails(${i})"> 
-				<div class="pokedex-card-header">
-                    <span class="pokemon-id">#${pokemon[i]['id']}</span>
-					<img src="${pokemon[i]['sprites']['other']['dream_world']['front_default']}" class="pokemon-img">
-				</div>
-				<div class="pokedex-card-body">
-			        <span>Name: ${pokemon[i]['name']}</span>
-                    <span>Type: ${getPokemonType1(i)}</span>
-                    <span>Type: ${getPokemonType2(i)}</span>
-				</div>
-			</div>
-		`;
+    for (let i = 0; i < loadedPokemon.length; i++) {
+        container.innerHTML += generatePokedexCardHTML(i);
     }
 }
 
 function getPokemonType1(i) {
-    if (pokemon[i]['types'][0]) {
-        return pokemon[i]['types'][0]['type']['name'];
+    if (loadedPokemon[i]['types'][0]) {
+        return loadedPokemon[i]['types'][0]['type']['name'];
     } else {
         return '';
     }
 }
 
 function getPokemonType2(i) {
-    if (pokemon[i]['types'][1]) {
-        return pokemon[i]['types'][1]['type']['name'];
+    if (loadedPokemon[i]['types'][1]) {
+        return loadedPokemon[i]['types'][1]['type']['name'];
     } else {
         return '';
     }
@@ -111,40 +98,31 @@ function closePokemonDetails() {
 
 function loadMorePokemon() {
     offset += 25;
-    init();
+    loadPokemonPagination();
 }
 
 async function filterPokemon() {
     let searchText = document.getElementById('search-input').value.toLowerCase();
-    console.log(searchText);
+    console.log('Search Text: ', searchText);
 
     let container = document.getElementById('pokedex-render-container');
     container.innerHTML = '';
 
-    for (let i = 0; i < allPokemonNames.length; i++) {
+    for (let i = 0; i < allPokemonNamesAndUrl.length; i++) {
 
-        if (allPokemonNames[i]['name'].toLowerCase().includes(searchText)) {
-            const url = allPokemonNames[i]['url'];
+        if (allPokemonNamesAndUrl[i]['name'].toLowerCase().includes(searchText)) {
+            const url = allPokemonNamesAndUrl[i]['url'];
             const response = await fetch(url);
             const responseJSON = await response.json();
+
             searchedPokemon.push(responseJSON);
         }
     }
 
-    for (let j = 0; j < searchedPokemon.length; j++) {
-        if (searchedPokemon[j]['name'].toLowerCase().includes(searchText)) {
-            console.log(searchedPokemon[j]);
-            container.innerHTML += `
-				<div class="pokedex-card">
-					<div class="pokedex-card-header">
-						<img src="${searchedPokemon[j]['sprites']['front_default']}" class="pokemon-img">
-					</div>
-					<div class="pokedex-card-body">
-						<p>ID: ${searchedPokemon[j]['id']} Name: ${searchedPokemon[j]['name']}</p>
-					</div>
-				</div>
 
-			`;
-        }
-    }
+    // for (let j = 0; j < loadedPokemon.length; j++) {
+    //     if (loadedPokemon[j]['name'].toLowerCase().includes(searchText)) {
+    //         container.innerHTML += generatePokedexCardHTML(j);
+    //     }
+    // }
 }

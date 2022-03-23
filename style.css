@@ -33,10 +33,19 @@ header h1 {
     height: 48px;
 }
 
+.search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: -24px;
+    cursor: pointer;
+}
+
 .search-bar img {
     width: 54px;
-    position: absolute;
-    left: -19px;
 }
 
 .search-input {
