@@ -2,12 +2,30 @@
 
 let offset = 0; // Starting point
 let limit = 25;
-const totalPokemonURL = 'https://pokeapi.co/api/v2/pokemon/'; // List Of total Pokemon count and names URL
+let numberOfAllPokemon = 1126;
 
+let allPokemonNames = [];
+let searchedPokemon = [];
 let pokemon = []; // Global array to store fetched Pokemon
 
 function init() {
     loadPokemonAPI();
+    loadAllPokemon();
+}
+
+async function loadAllPokemon() {
+    const url = `https://pokeapi.co/api/v2/pokemon/?limit=${numberOfAllPokemon}`;
+    const response = await fetch(url);
+    const responseJSON = await response.json();
+    console.log('All Pokemon: ', responseJSON);
+
+    getAllPokemon(responseJSON);
+}
+
+function getAllPokemon(responseJSON) {
+    for (let i = 0; i < responseJSON['results'].length; i++) {
+        allPokemonNames.push(responseJSON['results'][i]);
+    }
 }
 
 async function loadPokemonAPI() {
@@ -17,7 +35,6 @@ async function loadPokemonAPI() {
 
     console.log('Response API JSON: ', responseJSON);
     console.log('Response API JSON results: ', responseJSON['results']);
-
     getPokemon(responseJSON);
 }
 
@@ -72,7 +89,6 @@ function getPokemonType2(i) {
     }
 }
 
-// TODO Fix bug bc function gets called without event in line 44
 function showPokemonDetails(i) {
     let container = document.getElementById('pokemon-details-container');
     container.classList.remove('d-none');
@@ -98,23 +114,58 @@ function loadMorePokemon() {
     init();
 }
 
-function filterPokemon() {
+// function filterPokemon() {
+//     let searchText = document.getElementById('search-input').value.toLowerCase();
+//     console.log(searchText);
+
+//     let container = document.getElementById('pokedex-render-container');
+//     container.innerHTML = '';
+
+//     for (let i = 0; i < pokemon.length; i++) {
+
+//         if (pokemon[i]['name'].toLowerCase().includes(searchText)) {
+// container.innerHTML += `
+// 	<div class="pokedex-card">
+// 		<div class="pokedex-card-header">
+// 			<img src="${pokemon[i]['sprites']['other']['dream_world']['front_default']}" class="pokemon-img">
+// 		</div>
+// 		<div class="pokedex-card-body">
+// 			<p>ID: ${pokemon[i]['id']} Name: ${pokemon[i]['name']}</p>
+// 		</div>
+// 	</div>
+
+// `;
+//         }
+//     }
+// }
+
+async function filterPokemon() {
     let searchText = document.getElementById('search-input').value.toLowerCase();
     console.log(searchText);
 
     let container = document.getElementById('pokedex-render-container');
     container.innerHTML = '';
 
-    for (let i = 0; i < pokemon.length; i++) {
+    for (let i = 0; i < allPokemonNames.length; i++) {
 
-        if (pokemon[i]['name'].toLowerCase().includes(searchText)) {
+        if (allPokemonNames[i]['name'].toLowerCase().includes(searchText)) {
+            const url = allPokemonNames[i]['url'];
+            const response = await fetch(url);
+            const responseJSON = await response.json();
+            searchedPokemon.push(responseJSON);
+        }
+    }
+
+    for (let j = 0; j < searchedPokemon.length; j++) {
+        if (searchedPokemon[j]['name'].toLowerCase().includes(searchText)) {
+            console.log(searchedPokemon[j]);
             container.innerHTML += `
 				<div class="pokedex-card">
 					<div class="pokedex-card-header">
-						<img src="${pokemon[i]['sprites']['other']['dream_world']['front_default']}" class="pokemon-img">
+						<img src="${searchedPokemon[j]['sprites']['front_default']}" class="pokemon-img">
 					</div>
 					<div class="pokedex-card-body">
-						<p>ID: ${pokemon[i]['id']} Name: ${pokemon[i]['name']}</p>
+						<p>ID: ${searchedPokemon[j]['id']} Name: ${searchedPokemon[j]['name']}</p>
 					</div>
 				</div>
 
