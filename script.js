@@ -72,7 +72,7 @@ function getPokemonType2(i) {
     if (loadedPokemon[i]['types'][1]) {
         return loadedPokemon[i]['types'][1]['type']['name'];
     } else {
-        return '';
+        return '-';
     }
 }
 
@@ -116,13 +116,31 @@ async function filterPokemon() {
             const responseJSON = await response.json();
 
             searchedPokemon.push(responseJSON);
+
+            for (let i = 0; i < searchedPokemon.length; i++) {
+                const pokemon = searchedPokemon[i];
+                let pokemonInArray = loadedPokemon.find(p => p['name'] == pokemon['name']);
+                // let pokemonInArray = loadedPokemon.find(function(p) {
+                //     return p['name'] == pokemon['name'];
+                // });
+                if (!pokemonInArray) {
+                    loadedPokemon.push(pokemon);
+                }
+
+            }
+
+
         }
     }
 
 
-    // for (let j = 0; j < loadedPokemon.length; j++) {
-    //     if (loadedPokemon[j]['name'].toLowerCase().includes(searchText)) {
-    //         container.innerHTML += generatePokedexCardHTML(j);
-    //     }
-    // }
+    for (let j = 0; j < loadedPokemon.length; j++) {
+        if (loadedPokemon[j]['name'].toLowerCase().includes(searchText)) {
+            container.innerHTML += generatePokedexCardHTML(j);
+        }
+    }
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
