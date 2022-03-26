@@ -140,6 +140,13 @@ header h1 {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.pagination-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 32px 0 32px 0;
+}
+
 @font-face {
     font-family: 'pokemon-hollow';
     src: url('./fonts/pokemon_hollow.ttf');

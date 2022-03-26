@@ -2,7 +2,7 @@
 
 // Pagination Settings
 let offset = 0;
-let limit = 50;
+let limit = 25;
 
 // All Pokemon names and url 
 let numberOfAllPokemon = 1126;
