@@ -78,22 +78,19 @@ function getPokemonType2(i) {
 
 function showPokemonDetails(i) {
     let container = document.getElementById('pokemon-details-container');
+    document.body.style.overflow = 'hidden';
+
     container.classList.remove('d-none');
-    container.innerHTML = `
-        <div>
-            <div class="pokemon-details-header">
-                <button onclick="closePokemonDetails()">Close</button>
-            </div>
-            <div class="pokemon-details-body">
-            </div>
-        </div>
-    `;
+    container.innerHTML = generatePokemonDetailsCardHTML(i);
 
 }
 
 function closePokemonDetails() {
     let container = document.getElementById('pokemon-details-container');
-    container.classList.remove('d-none');
+    container.classList.add('d-none');
+    container.innerHTML = '';
+
+    document.body.style.overflow = 'auto';
 }
 
 function loadMorePokemon() {
@@ -150,4 +147,13 @@ function getPokemonImg(i) {
     } else {
         return './img/pokeball.svg';
     }
+}
+
+function getPokemonStat(index, stat) {
+    return loadedPokemon[index]['stats'][stat]['base_stat'];
+}
+
+function getPokemonStatPercent(index, stat) {
+    let stats = loadedPokemon[index]['stats'][stat]['base_stat'];
+    return (stats / 255) * 100;
 }
