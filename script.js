@@ -2,7 +2,7 @@
 
 // Pagination Settings
 let offset = 0;
-let limit = 25;
+let limit = 50;
 
 // All Pokemon names and url 
 let numberOfAllPokemon = 1126;
@@ -126,7 +126,6 @@ async function filterPokemon() {
                 if (!pokemonInArray) {
                     loadedPokemon.push(pokemon);
                 }
-
             }
 
 
@@ -143,4 +142,12 @@ async function filterPokemon() {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getPokemonImg(i) {
+    if (loadedPokemon[i]['sprites']['other']['official-artwork']['front_default']) {
+        return loadedPokemon[i]['sprites']['other']['official-artwork']['front_default'];
+    } else {
+        return './img/pokeball.svg';
+    }
 }

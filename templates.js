@@ -3,7 +3,7 @@ function generatePokedexCardHTML(i) {
             <div class="pokedex-card" onclick=""> 
                 <div class="pokedex-card-header">
                     <span class="pokemon-id">#${loadedPokemon[i]['id']}</span>
-                    <img src="${loadedPokemon[i]['sprites']['other']['official-artwork']['front_default']}" alt="No Image found!" class="pokemon-img">
+                    <img src="${getPokemonImg(i)}" alt="No Image found!" class="pokemon-img">
                 </div>
                 <div class="pokedex-card-body">
                     <b>${capitalizeFirstLetter(loadedPokemon[i]['name'])}</b>
