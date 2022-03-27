@@ -60,28 +60,20 @@ function renderPokemon() {
     }
 }
 
-function getPokemonType1(i) {
-    if (loadedPokemon[i]['types'][0]) {
-        return loadedPokemon[i]['types'][0]['type']['name'];
+function getPokemonType(index, typeIndex) {
+    if (loadedPokemon[index]['types'][typeIndex]) {
+        return loadedPokemon[index]['types'][typeIndex]['type']['name'];
     } else {
         return '';
     }
 }
 
-function getPokemonType2(i) {
-    if (loadedPokemon[i]['types'][1]) {
-        return loadedPokemon[i]['types'][1]['type']['name'];
-    } else {
-        return '-';
-    }
-}
-
-function showPokemonDetails(i) {
+function showPokemonDetails(index) {
     let container = document.getElementById('pokemon-details-container');
     document.body.style.overflow = 'hidden';
 
     container.classList.remove('d-none');
-    container.innerHTML = generatePokemonDetailsCardHTML(i);
+    container.innerHTML = generatePokemonDetailsCardHTML(index);
 
 }
 
@@ -137,13 +129,13 @@ async function filterPokemon() {
     }
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+function capitalize(string) {
+    return string.toUpperCase();
 }
 
-function getPokemonImg(i) {
-    if (loadedPokemon[i]['sprites']['other']['official-artwork']['front_default']) {
-        return loadedPokemon[i]['sprites']['other']['official-artwork']['front_default'];
+function getPokemonImg(index) {
+    if (loadedPokemon[index]['sprites']['other']['official-artwork']['front_default']) {
+        return loadedPokemon[index]['sprites']['other']['official-artwork']['front_default'];
     } else {
         return './img/pokeball.svg';
     }
@@ -156,4 +148,80 @@ function getPokemonStat(index, stat) {
 function getPokemonStatPercent(index, stat) {
     let stats = loadedPokemon[index]['stats'][stat]['base_stat'];
     return (stats / 255) * 100;
+}
+
+function getPokemonTypeHexColor(type) {
+    switch (type) {
+        case 'normal':
+            return '#a9a977';
+            break;
+
+        case 'fighting':
+            return '#c03028';
+            break;
+
+        case 'flying':
+            return '#98a4e0';
+            break;
+
+        case 'poison':
+            return '#bb5a9f';
+            break;
+
+        case 'ground':
+            return '#e7d4a9';
+            break;
+
+        case 'rock':
+            return '#bea563';
+            break;
+
+        case 'bug':
+            return '#a9bd42';
+            break;
+
+        case 'ghost':
+            return '#6663b2';
+            break;
+
+        case 'steel':
+            return '#afadc3';
+            break;
+
+        case 'fire':
+            return '#fe4833';
+            break;
+
+        case 'water':
+            return '#1f93f6';
+            break;
+
+        case 'grass':
+            return '#74d767';
+            break;
+
+        case 'electric':
+            return '#fec446';
+            break;
+
+        case 'psychic':
+            return '#fd6fa1';
+            break;
+
+        case 'ice':
+            return '#47cee4';
+            break;
+
+        case 'dragon':
+            return '#8667ee';
+            break;
+
+        case 'dark':
+            return '#765a4e';
+            break;
+
+        case 'fairy':
+            return '#fdb6f2';
+            break;
+    }
 }

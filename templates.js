@@ -6,9 +6,11 @@ function generatePokedexCardHTML(i) {
                     <img src="${getPokemonImg(i)}" alt="No Image found!" class="pokemon-img">
                 </div>
                 <div class="pokedex-card-body">
-                    <b>${capitalizeFirstLetter(loadedPokemon[i]['name'])}</b>
+                    <span class="pokemon-name">${loadedPokemon[i]['name']}</span>
                     <br>
-                    <span>Types: ${capitalizeFirstLetter(getPokemonType1(i))}, ${capitalizeFirstLetter(getPokemonType2(i))}</span>
+                    <div class="pokemon-types">
+                        <span class="pokemon-type" style="background-color: ${getPokemonTypeHexColor(getPokemonType(i, 0))}">${capitalize(getPokemonType(i, 0))}</span><span class="pokemon-type" style="background-color: ${getPokemonTypeHexColor(getPokemonType(i, 1))}">${capitalize(getPokemonType(i, 1))}</span>
+                    </div>
                 </div>
             </div>
         `;
@@ -24,6 +26,7 @@ function generatePokemonDetailsCardHTML(i) {
                 <img src="${getPokemonImg(i)}" alt="No Image found!" class="pokemon-img">
             </div>
             <div class="pokemon-details-body">
+                <span class="pokemon-name pokemon-details-name">${loadedPokemon[i]['name']}</span>
                 <div class="pokemon-stats">
                     <div class="pokemon-stat">
                         <span>HP </span>
@@ -68,6 +71,12 @@ function generatePokemonDetailsCardHTML(i) {
                         <span class="pokemon-stat-max">255</span>
                     </div>
                 </div>
+            </div>
+            <div class="pokemon-details-footer">
+                <button class="catch-me-btn" title="Catch me!">
+                    <img src="./img/pokeball.svg" alt="Catch Me!">
+                    CATCH ME!
+                </button>
             </div>
         </div>
     `;

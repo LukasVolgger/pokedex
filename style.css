@@ -97,9 +97,9 @@ header h1 {
     min-height: 200px;
     /*background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);*/
     /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
-    /*background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);*/
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     /*background-image: linear-gradient(to right, #434343 0%, black 100%);*/
-    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    /* background-image: linear-gradient(to top, #dfe9f3 0%, white 100%); */
     /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
     /*background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);*/
 }
@@ -119,6 +119,12 @@ header h1 {
     z-index: 1;
 }
 
+.pokemon-name {
+    font-weight: 100;
+    font-size: 24px;
+    font-family: 'pokemon-pocket-monk';
+}
+
 .pokedex-card-body {
     display: flex;
     flex-direction: column;
@@ -128,6 +134,19 @@ header h1 {
     height: 150px;
     margin-top: -24px;
     background-color: white;
+}
+
+.pokemon-types {
+    display: flex;
+    gap: 8px;
+}
+
+.pokemon-type {
+    padding: 8px;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    text-shadow: 0 0 2px #000000;
 }
 
 .pokemon-details-container {
@@ -156,7 +175,9 @@ header h1 {
 .pokemon-details-card {
     width: 50vw;
     height: 80vh;
-    background-image: linear-gradient(to bottom, #434343 0%, black 100%);
+    /* background-image: linear-gradient(to bottom, #434343 0%, black 100%); */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 16px;
 }
 
 .pokemon-details-header {
@@ -173,7 +194,7 @@ header h1 {
     position: absolute;
     top: 16px;
     right: 16px;
-    transition: all 225ms ease-in-out;
+    transition: scale 225ms ease-in-out;
 }
 
 .close-details-btn img {
@@ -182,13 +203,20 @@ header h1 {
 
 .close-details-btn:hover {
     filter: brightness(0) saturate(100%) invert(73%) sepia(85%) saturate(652%) hue-rotate(352deg) brightness(101%) contrast(104%);
-    transform: rotate(90deg);
-    /* transform: scale(1.05); */
+    /* transform: rotate(90deg); */
+    transform: scale(1.05);
+}
+
+.pokemon-details-name {
+    color: white;
 }
 
 .pokemon-details-body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 16px;
 }
 
 .pokemon-stats {
@@ -216,6 +244,52 @@ header h1 {
 
 .progress {
     width: 100%;
+    font-weight: 500;
+}
+
+.pokemon-details-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.catch-me-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.catch-me-btn img {
+    width: 48px;
+    object-fit: contain;
+}
+
+.catch-me-btn:hover {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97)
+}
+
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
 
 @font-face {
