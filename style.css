@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: #0c0a1f;
 }
 
 .border-spacing {
@@ -10,11 +11,19 @@ body {
     display: none !important;
 }
 
+.btns {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 64px;
+    height: 25vh;
+    background-image: url(./img/abstract_bg.jpg);
 }
 
 header h1 {
@@ -27,9 +36,8 @@ header h1 {
 .search-bar {
     display: flex;
     align-items: center;
-    position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    width: 40vw;
+    border-radius: 16px;
+    width: 25vw;
     height: 48px;
 }
 
@@ -37,11 +45,6 @@ header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    border: none;
-    position: absolute;
-    left: -24px;
-    cursor: pointer;
     padding: 4px;
     border-radius: 50%;
     transform: scale();
@@ -58,16 +61,33 @@ header h1 {
 }
 
 .search-input {
-    position: absolute;
     border: none;
-    left: 48px;
-    width: calc(40vw - 50px);
+    width: 100%;
     height: 100%;
     background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
 .search-input:focus {
     outline: none;
+}
+
+nav {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 24px;
+    background-color: rgb(54 54 54 / 50%);
+    border-radius: 16px;
+}
+
+.home-btn img {
+    width: 48px;
+}
+
+.show-favorites-btn img {
+    width: 48px;
 }
 
 .pokedex-render-container {
@@ -75,7 +95,7 @@ header h1 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
-    margin-top: 32px;
+    padding-top: 32px;
 }
 
 .pokedex-card {
@@ -83,7 +103,7 @@ header h1 {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 4px solid white;
     min-width: 250px;
     min-height: 300px;
     cursor: pointer;
@@ -97,19 +117,27 @@ header h1 {
     min-height: 200px;
     /*background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);*/
     /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
-    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    /* background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%); */
     /*background-image: linear-gradient(to right, #434343 0%, black 100%);*/
     /* background-image: linear-gradient(to top, #dfe9f3 0%, white 100%); */
     /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
     /*background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);*/
+    background-image: url(./img/grass_bg.jpg);
+    background-size: cover;
 }
 
 .pokemon-id {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 18px;
-    color: #395da9;
+    top: 0px;
+    right: 0px;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    min-width: 48px;
 }
 
 .pokemon-img {
@@ -173,7 +201,7 @@ header h1 {
 .pokemon-details-card {
     width: 50vw;
     height: 80vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
 }
 
@@ -186,8 +214,6 @@ header h1 {
 }
 
 .close-details-btn {
-    background-color: transparent;
-    border: none;
     position: absolute;
     top: 16px;
     right: 16px;
@@ -224,11 +250,6 @@ header h1 {
 
 .pokemon-details-name {
     color: white;
-}
-
-.favorite-btn {
-    background-color: transparent;
-    border: none;
 }
 
 .favorite-btn img {
@@ -273,9 +294,6 @@ header h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
     color: white;
 }
 

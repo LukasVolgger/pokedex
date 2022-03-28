@@ -20,12 +20,20 @@
 <body onload="init()">
     <header class="border-spacing">
         <h1>Pokédex</h1>
-        <form class="search-bar" onsubmit="filterPokemon(); return false">
-            <button class="search-btn" onclick="" title="Find me!" type="submit">
-                <img src="./img/pokeball.svg" alt="Pokeball">
+        <nav>
+            <form class="search-bar" onsubmit="filterPokemon(); return false">
+                <button class="search-btn btns" onclick="" title="Find me!" type="submit">
+                    <img src="./img/pokeball.svg" alt="Pokeball">
+                </button>
+                <input type="text" id="search-input" class="search-input" placeholder="Search by Name" required>
+            </form>
+            <button class="home-btn btns" onclick="home()">
+                <img src="./img/icons/home.svg" alt="Favorites">
             </button>
-            <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon by Name" required>
-        </form>
+            <button class="show-favorites-btn btns" onclick="showFavoritePokemon()">
+                <img src="./img/icons/favorite_saved.svg" alt="Favorites">
+            </button>
+        </nav>
     </header>
     <div id="pokemon-details-container" class="pokemon-details-container d-none"></div>
     <div id="pokedex-render-container" class="pokedex-render-container border-spacing">

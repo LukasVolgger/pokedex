@@ -72,7 +72,7 @@ function getPokemonType(index, typeIndex) {
     if (loadedPokemon[index]['types'][typeIndex]) {
         return loadedPokemon[index]['types'][typeIndex]['type']['name'];
     } else {
-        return '';
+        return 'd-none';
     }
 }
 
@@ -138,14 +138,16 @@ async function filterPokemon() {
 }
 
 function capitalize(string) {
-    return string.toUpperCase();
+    if (string) {
+        return string.toUpperCase();
+    }
 }
 
 function getPokemonImg(index) {
     if (loadedPokemon[index]['sprites']['other']['official-artwork']['front_default']) {
         return loadedPokemon[index]['sprites']['other']['official-artwork']['front_default'];
     } else {
-        return './img/pokeball.svg';
+        return './img/no_image.svg';
     }
 }
 

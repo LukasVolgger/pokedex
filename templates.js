@@ -9,7 +9,8 @@ function generatePokedexCardHTML(i) {
                     <span class="pokemon-name">${getPokemonName(i)}</span>
                     <br>
                     <div class="pokemon-types">
-                        <span class="pokemon-type" style="background-color: ${getPokemonTypeHexColor(getPokemonType(i, 0))}">${capitalize(getPokemonType(i, 0))}</span><span class="pokemon-type" style="background-color: ${getPokemonTypeHexColor(getPokemonType(i, 1))}">${capitalize(getPokemonType(i, 1))}</span>
+                        <span class="pokemon-type" style="background-color: ${getPokemonTypeHexColor(getPokemonType(i, 0))}">${capitalize(getPokemonType(i, 0))}</span>
+                        <span class="pokemon-type ${getPokemonType(i, 1)}" style="background-color: ${getPokemonTypeHexColor(getPokemonType(i, 1))}">${capitalize(getPokemonType(i, 1))}</span>
                     </div>
                 </div>
             </div>
@@ -20,7 +21,7 @@ function generatePokemonDetailsCardHTML(i) {
     return `
         <div class="pokemon-details-card">
             <div class="pokemon-details-header">
-                <button onclick="closePokemonDetails()" class="close-details-btn" title="Close!">
+                <button onclick="closePokemonDetails()" class="close-details-btn btns" title="Close!">
                     <img src="./img/icons/close.svg" alt="Close">
                 </button>
                 <img src="${getPokemonImg(i)}" alt="No Image found!" class="pokemon-img pokemon-details-img">
@@ -28,7 +29,7 @@ function generatePokemonDetailsCardHTML(i) {
             <div class="pokemon-details-body">
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(i)}</span>
-                    <button class="favorite-btn" title="Save me!" onclick="favoritePokemon(${i})">
+                    <button class="favorite-btn btns" title="Save me!" onclick="favoritePokemon(${i})">
                         <img src="./img/icons/favorite.svg" alt="Favorite" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
@@ -78,7 +79,7 @@ function generatePokemonDetailsCardHTML(i) {
                 </div>
             </div>
             <div class="pokemon-details-footer">
-                <button class="catch-me-btn" title="Catch me!">
+                <button class="catch-me-btn btns" title="Catch me!">
                     <img src="./img/pokeball.svg" alt="Catch Me!">
                     Catch me!
                 </button>
