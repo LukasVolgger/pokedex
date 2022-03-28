@@ -114,15 +114,13 @@ header h1 {
 
 .pokemon-img {
     width: 120px;
-    height: 120px;
     object-fit: contain;
     z-index: 1;
 }
 
 .pokemon-name {
-    font-weight: 100;
+    font-weight: 600;
     font-size: 24px;
-    font-family: 'pokemon-pocket-monk';
 }
 
 .pokedex-card-body {
@@ -205,6 +203,10 @@ header h1 {
     filter: brightness(0) saturate(100%) invert(73%) sepia(85%) saturate(652%) hue-rotate(352deg) brightness(101%) contrast(104%);
     /* transform: rotate(90deg); */
     transform: scale(1.05);
+}
+
+.pokemon-details-img {
+    width: 200px;
 }
 
 .pokemon-details-name {

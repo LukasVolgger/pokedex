@@ -60,6 +60,11 @@ function renderPokemon() {
     }
 }
 
+function getPokemonName(index) {
+    let name = loadedPokemon[index]['name'];
+    return name.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase()); // https://stackoverflow.com/questions/41490076/capitalize-every-letter-after-and-characters
+}
+
 function getPokemonType(index, typeIndex) {
     if (loadedPokemon[index]['types'][typeIndex]) {
         return loadedPokemon[index]['types'][typeIndex]['type']['name'];
