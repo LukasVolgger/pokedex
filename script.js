@@ -12,6 +12,9 @@ let allPokemonNamesAndUrl = [];
 let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
 let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
 
+let favoritePokemons = [];
+let savedFavoritePokemons = [];
+
 function init() {
     loadPokemonPagination();
     loadAllPokemonNamesAndUrl();
@@ -228,5 +231,21 @@ function getPokemonTypeHexColor(type) {
         case 'fairy':
             return '#fdb6f2';
             break;
+    }
+}
+
+function favoritePokemon(index) {
+    if (favoritePokemons[index] == undefined) {
+        favoritePokemons[index] = false;
+    }
+
+    favoritePokemons[index] = !favoritePokemons[index];
+
+    if (favoritePokemons[index] == true) {
+        document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
+        savedFavoritePokemons[index] = loadedPokemon[index];
+    } else {
+        document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
+        savedFavoritePokemons.splice(index, 1);
     }
 }

@@ -26,7 +26,12 @@ function generatePokemonDetailsCardHTML(i) {
                 <img src="${getPokemonImg(i)}" alt="No Image found!" class="pokemon-img pokemon-details-img">
             </div>
             <div class="pokemon-details-body">
-                <span class="pokemon-name pokemon-details-name">${getPokemonName(i)}</span>
+                <div class="pokemon-name-container">
+                    <span class="pokemon-name pokemon-details-name">${getPokemonName(i)}</span>
+                    <button class="favorite-btn" title="Save me!" onclick="favoritePokemon(${i})">
+                        <img src="./img/icons/favorite.svg" alt="Favorite" id="fav-icon-pokemon-index-${i}">
+                    </button>
+                </div>
                 <div class="pokemon-stats">
                     <div class="pokemon-stat">
                         <span>HP </span>
