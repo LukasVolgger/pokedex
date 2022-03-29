@@ -110,3 +110,9 @@ function generatePokemonDetailsCardHTML(array, i) {
         </div>
     `;
 }
+
+function generateEmptyHTML() {
+    return `
+        <h1 class="empty-text">Nothing to see here!</h1>
+    `;
+}

@@ -74,14 +74,18 @@ function loadFromLocalStorage() {
     // let searchedPokemonAsString = localStorage.getItem('searchedPokemon');
     let favoritePokemonAsString = localStorage.getItem('favoritePokemon');
 
-    // loadedPokemon = JSON.parse(loadedPokemonAsString);
-    // searchedPokemon = JSON.parse(searchedPokemonAsString);
-    favoritePokemon = JSON.parse(favoritePokemonAsString);
+    // loadedPokemon = JSON.parse(loadedPokemonAsString) || [];
+    // searchedPokemon = JSON.parse(searchedPokemonAsString) || [];
+    favoritePokemon = JSON.parse(favoritePokemonAsString) || [];
 }
 
 function renderPokemon(array) {
     let container = document.getElementById('pokedex-render-container');
     container.innerHTML = '';
+
+    if (array.length < 1) {
+        container.innerHTML = generateEmptyHTML();
+    }
 
     for (let i = 0; i < array.length; i++) {
         container.innerHTML += generatePokedexCardHTML(array, i);
@@ -119,8 +123,10 @@ function closePokemonDetails() {
 }
 
 function loadMorePokemon() {
-    offset += 25;
-    loadPokemonPagination();
+    if (userIsOnHome) {
+        offset += 25;
+        loadPokemonPagination();
+    }
 }
 
 async function filterPokemon() {
@@ -295,6 +301,8 @@ function setFavoritePokemon(array, index) {
         array[index]['favorite'] = false;
         array[index]['favorite-index'] = [];
         favoritePokemon.pop(array[index]['favorite-index'], 1);
+
+        renderPokemon(favoritePokemon);
     }
     saveToLocalStorage();
 }
@@ -313,6 +321,8 @@ function home() {
 }
 
 function showFavoritePokemon() {
+    userIsOnHome = false;
+
     if (favoritePokemon.length > 0) {
         renderPokemon(favoritePokemon);
     } else {
@@ -321,7 +331,7 @@ function showFavoritePokemon() {
 }
 
 window.addEventListener('scroll', function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight && userIsOnHome) {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
         // console.log('Scrolled to bottom!');
         loadMorePokemon();
     }

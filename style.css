@@ -306,6 +306,13 @@ nav {
     color: #ed5564;
 }
 
+.empty-text {
+    position: absolute;
+    top: 50%;
+    color: #ed5564;
+    font-size: 64px;
+}
+
 @font-face {
     font-family: 'pokemon-hollow';
     src: url('./fonts/pokemon_hollow.ttf');
