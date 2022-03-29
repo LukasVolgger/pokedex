@@ -1,3 +1,6 @@
+// TODO Refactor all js files
+// TODO Comment alls functions
+
 'use strict';
 
 // Pagination Settings
@@ -8,13 +11,14 @@ let limit = 25;
 let numberOfAllPokemon = 1126;
 let allPokemonNamesAndUrl = [];
 
-// Save Pokemons
+// Save Pokemon
 let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
 let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
-let favoritePokemons = [];
+let favoritePokemon = [];
 
 let userIsOnHome = true;
-let userIsOnFavorites = false;
+
+loadFromLocalStorage();
 
 function init() {
     loadPokemonPagination();
@@ -53,6 +57,26 @@ async function getPokemonForPagination(responseJSON) {
     }
 
     renderPokemon(loadedPokemon);
+}
+
+function saveToLocalStorage() {
+    // let loadedPokemonAsString = JSON.stringify(loadedPokemon);
+    // let searchedPokemonAsString = JSON.stringify(searchedPokemon);
+    let favoritePokemonAsString = JSON.stringify(favoritePokemon);
+
+    // localStorage.setItem('loadedPokemon', loadedPokemonAsString);
+    // localStorage.setItem('searchedPokemon', searchedPokemonAsString);
+    localStorage.setItem('favoritePokemon', favoritePokemonAsString);
+}
+
+function loadFromLocalStorage() {
+    // let loadedPokemonAsString = localStorage.getItem('loadedPokemon');
+    // let searchedPokemonAsString = localStorage.getItem('searchedPokemon');
+    let favoritePokemonAsString = localStorage.getItem('favoritePokemon');
+
+    // loadedPokemon = JSON.parse(loadedPokemonAsString);
+    // searchedPokemon = JSON.parse(searchedPokemonAsString);
+    favoritePokemon = JSON.parse(favoritePokemonAsString);
 }
 
 function renderPokemon(array) {
@@ -255,7 +279,7 @@ function getPokemonAbilities(array, index, abilityIndex) {
     }
 }
 
-function favoritePokemon(array, index) {
+function setFavoritePokemon(array, index) {
     if (array[index]['favorite'] == undefined) {
         loadedPokemon[index]['favorite'] = false;
     }
@@ -264,14 +288,15 @@ function favoritePokemon(array, index) {
 
     if (array[index]['favorite'] == true) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
-        favoritePokemons.push(loadedPokemon[index]);
-        array[index]['favorite-index'] = favoritePokemons.length - 1;
+        favoritePokemon.push(loadedPokemon[index]);
+        array[index]['favorite-index'] = favoritePokemon.length - 1;
     } else {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
         array[index]['favorite'] = false;
         array[index]['favorite-index'] = [];
-        favoritePokemons.pop(array[index]['favorite-index'], 1);
+        favoritePokemon.pop(array[index]['favorite-index'], 1);
     }
+    saveToLocalStorage();
 }
 
 function getPokemonFavoriteState(array, index) {
@@ -288,10 +313,8 @@ function home() {
 }
 
 function showFavoritePokemon() {
-    userIsOnFavorites = true;
-
-    if (favoritePokemons.length > 0) {
-        renderPokemon(favoritePokemons);
+    if (favoritePokemon.length > 0) {
+        renderPokemon(favoritePokemon);
     } else {
         window.alert('There are no Pokemons to display! Go and catch some you like!');
     }
