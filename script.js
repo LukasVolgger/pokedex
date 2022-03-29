@@ -11,11 +11,13 @@ let allPokemonNamesAndUrl = [];
 // Save Pokemons
 let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
 let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
-
 let favoritePokemons = [];
 let savedFavoritePokemons = [];
 
+let userIsOnHome = true;
+
 function init() {
+    loadedPokemon = [];
     loadPokemonPagination();
     loadAllPokemonNamesAndUrl();
 }
@@ -99,8 +101,12 @@ function loadMorePokemon() {
 }
 
 async function filterPokemon() {
+    userIsOnHome = false;
+
     let searchText = document.getElementById('search-input').value.toLowerCase();
-    console.log('Search Text: ', searchText);
+    // console.log('Search Text: ', searchText);
+
+    document.getElementById('search-input').value = '';
 
     let container = document.getElementById('pokedex-render-container');
     container.innerHTML = '';
@@ -251,3 +257,27 @@ function favoritePokemon(index) {
         savedFavoritePokemons.splice(index, 1);
     }
 }
+
+function getPokemonFavoriteState(index) {
+    if (favoritePokemons[index] == true) {
+        return './img/icons/favorite_saved.svg';
+    } else {
+        return './img/icons/favorite.svg';
+    }
+}
+
+function home() {
+    userIsOnHome = true;
+    init();
+}
+
+function showFavoritePokemon() {
+    renderPokemon();
+}
+
+window.addEventListener('scroll', function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight && userIsOnHome) {
+        // console.log('Scrolled to bottom!');
+        loadMorePokemon();
+    }
+});

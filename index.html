@@ -18,7 +18,7 @@
 </head>
 
 <body onload="init()">
-    <header class="border-spacing">
+    <header class="border-spacing" id="header">
         <h1>Pokédex</h1>
         <nav>
             <form class="search-bar" onsubmit="filterPokemon(); return false">
@@ -39,10 +39,6 @@
     <div id="pokedex-render-container" class="pokedex-render-container border-spacing">
         <!-- Pokemon are rendered here -->
     </div>
-    <div class="pagination-footer">
-        <button type="button" class="btn btn-secondary btn-lg" onclick="loadMorePokemon()">Load More</button>
-    </div>
-
 </body>
 
 </html>

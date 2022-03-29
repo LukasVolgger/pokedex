@@ -30,7 +30,7 @@ function generatePokemonDetailsCardHTML(i) {
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(i)}</span>
                     <button class="favorite-btn btns" title="Save me!" onclick="favoritePokemon(${i})">
-                        <img src="./img/icons/favorite.svg" alt="Favorite" id="fav-icon-pokemon-index-${i}">
+                        <img src="${getPokemonFavoriteState(i)}" alt="Favorite" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
                 <div class="pokemon-stats">
