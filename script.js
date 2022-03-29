@@ -12,12 +12,13 @@ let allPokemonNamesAndUrl = [];
 let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
 let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
 let favoritePokemons = [];
+let test = [];
 let savedFavoritePokemons = [];
 
 let userIsOnHome = true;
+let userIsOnFavorites = false;
 
 function init() {
-    loadedPokemon = [];
     loadPokemonPagination();
     loadAllPokemonNamesAndUrl();
 }
@@ -53,37 +54,37 @@ async function getPokemonForPagination(responseJSON) {
         loadedPokemon.push(responseSinglePokemonJSON); // Push all Pokemon in global array - After every recall +offset
     }
 
-    renderPokemon();
+    renderPokemon(loadedPokemon);
 }
 
-function renderPokemon() {
+function renderPokemon(array) {
     let container = document.getElementById('pokedex-render-container');
     container.innerHTML = '';
 
-    for (let i = 0; i < loadedPokemon.length; i++) {
-        container.innerHTML += generatePokedexCardHTML(i);
+    for (let i = 0; i < array.length; i++) {
+        container.innerHTML += generatePokedexCardHTML(array, i);
     }
 }
 
-function getPokemonName(index) {
-    let name = loadedPokemon[index]['name'];
+function getPokemonName(array, index) {
+    let name = array[index]['name'];
     return name.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase()); // https://stackoverflow.com/questions/41490076/capitalize-every-letter-after-and-characters
 }
 
-function getPokemonType(index, typeIndex) {
-    if (loadedPokemon[index]['types'][typeIndex]) {
-        return loadedPokemon[index]['types'][typeIndex]['type']['name'];
+function getPokemonType(array, index, typeIndex) {
+    if (array[index]['types'][typeIndex]) {
+        return array[index]['types'][typeIndex]['type']['name'];
     } else {
         return 'd-none';
     }
 }
 
-function showPokemonDetails(index) {
+function showPokemonDetails(array, index) {
     let container = document.getElementById('pokemon-details-container');
     document.body.style.overflow = 'hidden';
 
     container.classList.remove('d-none');
-    container.innerHTML = generatePokemonDetailsCardHTML(index);
+    container.innerHTML = generatePokemonDetailsCardHTML(array, index);
 
 }
 
@@ -130,15 +131,13 @@ async function filterPokemon() {
                     loadedPokemon.push(pokemon);
                 }
             }
-
-
         }
     }
 
 
     for (let j = 0; j < loadedPokemon.length; j++) {
         if (loadedPokemon[j]['name'].toLowerCase().includes(searchText)) {
-            container.innerHTML += generatePokedexCardHTML(j);
+            container.innerHTML += generatePokedexCardHTML(loadedPokemon, j);
         }
     }
 }
@@ -149,20 +148,24 @@ function capitalize(string) {
     }
 }
 
-function getPokemonImg(index) {
-    if (loadedPokemon[index]['sprites']['other']['official-artwork']['front_default']) {
-        return loadedPokemon[index]['sprites']['other']['official-artwork']['front_default'];
+function getPokemonID(array, index) {
+    return array[index]['id'];
+}
+
+function getPokemonImg(array, index) {
+    if (array[index]['sprites']['other']['official-artwork']['front_default']) {
+        return array[index]['sprites']['other']['official-artwork']['front_default'];
     } else {
         return './img/no_image.svg';
     }
 }
 
-function getPokemonStat(index, stat) {
-    return loadedPokemon[index]['stats'][stat]['base_stat'];
+function getPokemonStat(array, index, stat) {
+    return array[index]['stats'][stat]['base_stat'];
 }
 
-function getPokemonStatPercent(index, stat) {
-    let stats = loadedPokemon[index]['stats'][stat]['base_stat'];
+function getPokemonStatPercent(array, index, stat) {
+    let stats = array[index]['stats'][stat]['base_stat'];
     return (stats / 255) * 100;
 }
 
@@ -242,24 +245,27 @@ function getPokemonTypeHexColor(type) {
     }
 }
 
-function favoritePokemon(index) {
-    if (favoritePokemons[index] == undefined) {
-        favoritePokemons[index] = false;
+function favoritePokemon(array, index) {
+    if (array[index]['favorite'] == undefined) {
+        loadedPokemon[index]['favorite'] = false;
     }
 
-    favoritePokemons[index] = !favoritePokemons[index];
+    array[index]['favorite'] = !array[index]['favorite'];
 
-    if (favoritePokemons[index] == true) {
+    if (array[index]['favorite'] == true) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
-        savedFavoritePokemons[index] = loadedPokemon[index];
+        savedFavoritePokemons.push(loadedPokemon[index]);
+        array[index]['favorite-index'] = savedFavoritePokemons.length - 1;
     } else {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
-        savedFavoritePokemons.splice(index, 1);
+        array[index]['favorite'] = false;
+        array[index]['favorite-index'] = [];
+        savedFavoritePokemons.pop(array[index]['favorite-index'], 1);
     }
 }
 
-function getPokemonFavoriteState(index) {
-    if (favoritePokemons[index] == true) {
+function getPokemonFavoriteState(array, index) {
+    if (array[index]['favorite'] == true) {
         return './img/icons/favorite_saved.svg';
     } else {
         return './img/icons/favorite.svg';
@@ -268,11 +274,12 @@ function getPokemonFavoriteState(index) {
 
 function home() {
     userIsOnHome = true;
-    init();
+    renderPokemon(loadedPokemon);
 }
 
 function showFavoritePokemon() {
-    renderPokemon();
+    userIsOnFavorites = true;
+    renderPokemon(savedFavoritePokemons);
 }
 
 window.addEventListener('scroll', function() {
