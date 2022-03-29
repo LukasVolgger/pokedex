@@ -12,8 +12,6 @@ let allPokemonNamesAndUrl = [];
 let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
 let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
 let favoritePokemons = [];
-let test = [];
-let savedFavoritePokemons = [];
 
 let userIsOnHome = true;
 let userIsOnFavorites = false;
@@ -245,6 +243,18 @@ function getPokemonTypeHexColor(type) {
     }
 }
 
+function getPokemonProperties(array, index, property) {
+    return array[index][property];
+}
+
+function getPokemonAbilities(array, index, abilityIndex) {
+    if (array[index]['abilities'][abilityIndex]) {
+        return array[index]['abilities'][abilityIndex]['ability']['name'].replace(/(^|\/|-)(\S)/g, s => s.toUpperCase());
+    } else {
+        return 'd-none';
+    }
+}
+
 function favoritePokemon(array, index) {
     if (array[index]['favorite'] == undefined) {
         loadedPokemon[index]['favorite'] = false;
@@ -254,13 +264,13 @@ function favoritePokemon(array, index) {
 
     if (array[index]['favorite'] == true) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
-        savedFavoritePokemons.push(loadedPokemon[index]);
-        array[index]['favorite-index'] = savedFavoritePokemons.length - 1;
+        favoritePokemons.push(loadedPokemon[index]);
+        array[index]['favorite-index'] = favoritePokemons.length - 1;
     } else {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
         array[index]['favorite'] = false;
         array[index]['favorite-index'] = [];
-        savedFavoritePokemons.pop(array[index]['favorite-index'], 1);
+        favoritePokemons.pop(array[index]['favorite-index'], 1);
     }
 }
 
@@ -279,7 +289,12 @@ function home() {
 
 function showFavoritePokemon() {
     userIsOnFavorites = true;
-    renderPokemon(savedFavoritePokemons);
+
+    if (favoritePokemons.length > 0) {
+        renderPokemon(favoritePokemons);
+    } else {
+        window.alert('There are no Pokemons to display! Go and catch some you like!');
+    }
 }
 
 window.addEventListener('scroll', function() {

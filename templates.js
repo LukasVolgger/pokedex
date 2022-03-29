@@ -3,8 +3,8 @@ function generatePokedexCardHTML(array, i) {
 
     if (array == loadedPokemon) {
         arrayName = 'loadedPokemon';
-    } else if (array = savedFavoritePokemons) {
-        arrayName = 'savedFavoritePokemons';
+    } else if (array = favoritePokemons) {
+        arrayName = 'favoritePokemons';
     }
 
     return `
@@ -30,8 +30,8 @@ function generatePokemonDetailsCardHTML(array, i) {
 
     if (array == loadedPokemon) {
         arrayName = 'loadedPokemon';
-    } else if (array = savedFavoritePokemons) {
-        arrayName = 'savedFavoritePokemons';
+    } else if (array = favoritePokemons) {
+        arrayName = 'favoritePokemons';
     }
 
     return `
@@ -51,54 +51,57 @@ function generatePokemonDetailsCardHTML(array, i) {
                 </div>
                 <div class="pokemon-stats">
                     <div class="pokemon-stat">
-                        <span>HP </span>
+                        <span class="pokemon-properties">HP</span>
                         <div class="progress">
                             <div class="progress-bar bg-success" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 0)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 0)}</div>
                         </div>
-                        <span class="pokemon-stat-max">255</span>
+                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span>ATK</span>
+                        <span class="pokemon-properties">ATK</span>
                         <div class="progress">
                             <div class="progress-bar bg-info" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 1)}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 1)}</div>
                         </div>
-                        <span class="pokemon-stat-max">255</span>
+                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span>DEF</span>
+                        <span class="pokemon-properties">DEF</span>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 2)}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 2)}</div>
                         </div>
-                        <span class="pokemon-stat-max">255</span>
+                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span>S-ATK</span>
+                        <span class="pokemon-properties">S-ATK</span>
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 3)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 3)}</div>
                         </div>
-                        <span class="pokemon-stat-max">255</span>
+                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span>S-DEF</span>
+                        <span class="pokemon-properties">S-DEF</span>
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 4)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 4)}</div>
                         </div>
-                        <span class="pokemon-stat-max">255</span>
+                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span>SPEED</span>
+                        <span class="pokemon-properties">SPEED</span>
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 5)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 5)}</div>
                         </div>
-                        <span class="pokemon-stat-max">255</span>
+                        <span class="pokemon-properties">255</span>
                     </div>
                 </div>
             </div>
             <div class="pokemon-details-footer">
-                <button class="catch-me-btn btns" title="Catch me!">
-                    <img src="./img/pokeball.svg" alt="Catch Me!">
-                    Catch me!
-                </button>
+                <span class="pokemon-properties">Height: ${getPokemonProperties(array, i, 'height') / 10}m</span>
+                <span class="pokemon-properties">Weight: ${getPokemonProperties(array, i, 'weight') / 10}kg</span>
+                <div>
+                    <span class="pokemon-properties">Abilities:</span>
+                    <span class="pokemon-properties">${getPokemonAbilities(array, i, 0)}</span>
+                    <span class="pokemon-properties ${getPokemonAbilities(array, i, 1)}">& ${getPokemonAbilities(array, i, 1)}</span>
+                </div>
             </div>
         </div>
     `;
