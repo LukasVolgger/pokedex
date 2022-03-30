@@ -63,21 +63,21 @@ async function getPokemonForPagination(responseJSON) {
 function saveToLocalStorage() {
     // let loadedPokemonAsString = JSON.stringify(loadedPokemon);
     // let searchedPokemonAsString = JSON.stringify(searchedPokemon);
-    let favoritePokemonAsString = JSON.stringify(favoritePokemon);
+    // let favoritePokemonAsString = JSON.stringify(favoritePokemon);
 
     // localStorage.setItem('loadedPokemon', loadedPokemonAsString);
     // localStorage.setItem('searchedPokemon', searchedPokemonAsString);
-    localStorage.setItem('favoritePokemon', favoritePokemonAsString);
+    // localStorage.setItem('favoritePokemon', favoritePokemonAsString);
 }
 
 function loadFromLocalStorage() {
     // let loadedPokemonAsString = localStorage.getItem('loadedPokemon');
     // let searchedPokemonAsString = localStorage.getItem('searchedPokemon');
-    let favoritePokemonAsString = localStorage.getItem('favoritePokemon');
+    // let favoritePokemonAsString = localStorage.getItem('favoritePokemon');
 
     // loadedPokemon = JSON.parse(loadedPokemonAsString) || [];
     // searchedPokemon = JSON.parse(searchedPokemonAsString) || [];
-    favoritePokemon = JSON.parse(favoritePokemonAsString) || [];
+    // favoritePokemon = JSON.parse(favoritePokemonAsString) || [];
 }
 
 function renderPokemon(array) {
@@ -286,9 +286,9 @@ function getPokemonAbilities(array, index, abilityIndex) {
     }
 }
 
-function setFavoritePokemon(array, index) {
+function setFavoritePokemon(array, index, pokemonID) {
     if (array[index]['favorite'] == undefined) {
-        loadedPokemon[index]['favorite'] = false;
+        array[index]['favorite'] = false;
     }
 
     array[index]['favorite'] = !array[index]['favorite'];
@@ -296,15 +296,12 @@ function setFavoritePokemon(array, index) {
     if (array[index]['favorite'] == true) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
         favoritePokemon.push(loadedPokemon[index]);
-        array[index]['favorite-index'] = favoritePokemon.length - 1;
 
         saveToLocalStorage();
     } else {
         // FIXME remove favorite status is buggy
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
         array[index]['favorite'] = false;
-        array[index]['favorite-index'] = [];
-        favoritePokemon.pop(array[index]['favorite-index'], 1);
 
         saveToLocalStorage();
         renderPokemon(favoritePokemon);

@@ -46,7 +46,7 @@ function generatePokemonDetailsCardHTML(array, i) {
             <div class="pokemon-details-body">
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
-                    <button class="favorite-btn btns" title="Save me!" onclick="setFavoritePokemon(${arrayName}, ${i})">
+                    <button class="favorite-btn btns" title="Save me!" onclick="setFavoritePokemon(${arrayName}, ${i}, ${getPokemonID(array, i)})">
                         <img src="${getPokemonFavoriteState(array, i)}" alt="Favorite" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
