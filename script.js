@@ -1,5 +1,6 @@
 // TODO Refactor all js files
 // TODO Comment alls functions
+// FIXME Searched Pokemon are saved in loadedPokemon at the end of the pagination. Example: search 'ponyta' = ID 77, it will be twice in loaded pokemon after scrolling to the position of the pagination
 
 'use strict';
 
@@ -296,15 +297,18 @@ function setFavoritePokemon(array, index) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
         favoritePokemon.push(loadedPokemon[index]);
         array[index]['favorite-index'] = favoritePokemon.length - 1;
+
+        saveToLocalStorage();
     } else {
+        // FIXME remove favorite status is buggy
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
         array[index]['favorite'] = false;
         array[index]['favorite-index'] = [];
         favoritePokemon.pop(array[index]['favorite-index'], 1);
 
+        saveToLocalStorage();
         renderPokemon(favoritePokemon);
     }
-    saveToLocalStorage();
 }
 
 function getPokemonFavoriteState(array, index) {
