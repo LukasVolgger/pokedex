@@ -1,10 +1,18 @@
 function generatePokedexCardHTML(array, i) {
     let arrayName;
 
-    if (array == loadedPokemon) {
-        arrayName = 'loadedPokemon';
-    } else if (array = favoritePokemon) {
-        arrayName = 'favoritePokemon';
+    switch (array) {
+        case loadedPokemon:
+            arrayName = 'loadedPokemon';
+            break;
+
+        case searchedPokemon:
+            arrayName = 'searchedPokemon';
+            break;
+
+        case favoritePokemon:
+            arrayName = 'favoritePokemon';
+            break;
     }
 
     return `
@@ -29,10 +37,18 @@ function generatePokedexCardHTML(array, i) {
 function generatePokemonDetailsCardHTML(array, i) {
     let arrayName;
 
-    if (array == loadedPokemon) {
-        arrayName = 'loadedPokemon';
-    } else if (array = favoritePokemon) {
-        arrayName = 'favoritePokemon';
+    switch (array) {
+        case loadedPokemon:
+            arrayName = 'loadedPokemon';
+            break;
+
+        case searchedPokemon:
+            arrayName = 'searchedPokemon';
+            break;
+
+        case favoritePokemon:
+            arrayName = 'favoritePokemon';
+            break;
     }
 
     return `
