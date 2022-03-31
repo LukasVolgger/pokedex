@@ -198,6 +198,26 @@ function showFavoritePokemon() {
     }
 }
 
+function getArrayNameAsString(array) {
+    let arrayNameAsString;
+
+    switch (array) {
+        case loadedPokemon:
+            arrayNameAsString = 'loadedPokemon';
+            break;
+
+        case searchedPokemon:
+            arrayNameAsString = 'searchedPokemon';
+            break;
+
+        case favoritePokemon:
+            arrayNameAsString = 'favoritePokemon';
+            break;
+    }
+
+    return arrayNameAsString;
+}
+
 function capitalize(string) {
     if (string) {
         return string.toUpperCase();

@@ -1,22 +1,6 @@
 function generatePokedexCardHTML(array, i) {
-    let arrayName;
-
-    switch (array) {
-        case loadedPokemon:
-            arrayName = 'loadedPokemon';
-            break;
-
-        case searchedPokemon:
-            arrayName = 'searchedPokemon';
-            break;
-
-        case favoritePokemon:
-            arrayName = 'favoritePokemon';
-            break;
-    }
-
     return `
-            <div class="pokedex-card" onclick="showPokemonDetails(${arrayName}, ${i})"> 
+            <div class="pokedex-card" onclick="showPokemonDetails(${getArrayNameAsString(array)}, ${i})"> 
                 <div class="pokedex-card-header">
                     <span class="pokemon-id">#${getPokemonID(array, i)}</span>
                     <img src="${getPokemonImg(array, i)}" alt="No Image found!" class="pokemon-img">
@@ -33,24 +17,7 @@ function generatePokedexCardHTML(array, i) {
         `;
 }
 
-// TODO Restyle progress bars
 function generatePokemonDetailsCardHTML(array, i) {
-    let arrayName;
-
-    switch (array) {
-        case loadedPokemon:
-            arrayName = 'loadedPokemon';
-            break;
-
-        case searchedPokemon:
-            arrayName = 'searchedPokemon';
-            break;
-
-        case favoritePokemon:
-            arrayName = 'favoritePokemon';
-            break;
-    }
-
     return `
         <div class="pokemon-details-card">
             <div class="pokemon-details-header">
@@ -62,7 +29,7 @@ function generatePokemonDetailsCardHTML(array, i) {
             <div class="pokemon-details-body">
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
-                    <button class="favorite-btn btns" title="Save me!" onclick="setFavoritePokemon(${arrayName}, ${i}, ${getPokemonID(array, i)})">
+                    <button class="favorite-btn btns" title="Save me!" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
                         <img src="${getPokemonFavoriteState(array, i)}" alt="Favorite" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
@@ -70,42 +37,42 @@ function generatePokemonDetailsCardHTML(array, i) {
                     <div class="pokemon-stat">
                         <span class="pokemon-properties pokemon-stat-description">HP</span>
                         <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 0)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 0)}</div>
+                            <div class="progress-bar pokemon-stat-hp" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 0)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 0)}</div>
                         </div>
                         <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
                         <span class="pokemon-properties pokemon-stat-description">ATK</span>
                         <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 1)}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 1)}</div>
+                            <div class="progress-bar pokemon-stat-atk" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 1)}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 1)}</div>
                         </div>
                         <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
                         <span class="pokemon-properties pokemon-stat-description">DEF</span>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 2)}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 2)}</div>
+                            <div class="progress-bar pokemon-stat-def" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 2)}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 2)}</div>
                         </div>
                         <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
                         <span class="pokemon-properties pokemon-stat-description">S-ATK</span>
                         <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 3)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 3)}</div>
+                            <div class="progress-bar pokemon-stat-s-atk" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 3)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 3)}</div>
                         </div>
                         <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
                         <span class="pokemon-properties pokemon-stat-description">S-DEF</span>
                         <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 4)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 4)}</div>
+                            <div class="progress-bar pokemon-stat-s-def" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 4)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 4)}</div>
                         </div>
                         <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
                         <span class="pokemon-properties pokemon-stat-description">SPEED</span>
                         <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 5)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 5)}</div>
+                            <div class="progress-bar pokemon-stat-speed" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 5)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 5)}</div>
                         </div>
                         <span class="pokemon-properties">255</span>
                     </div>
