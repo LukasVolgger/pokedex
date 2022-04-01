@@ -64,34 +64,35 @@ async function getPokemonForPagination(responseJSON) {
 }
 
 async function filterPokemon() {
-    // Prevent pagination to load
+    // Prevent pagination to load more pokemon
     userIsOnHome = false;
 
     // Get search input from user
     let searchText = document.getElementById('search-input').value.toLowerCase();
     // console.log('Search Text: ', searchText);
-    // Clear user unput after submit
+
+    // Clear user input after submit
     document.getElementById('search-input').value = '';
 
-    // Get render container and clear it
-    // let container = document.getElementById('pokedex-render-container');
-    // container.innerHTML = '';
+    if (searchText.length >= 3) {
+        // Iterate through all Pokemon names and urls
+        for (let i = 0; i < allPokemonNamesAndUrl.length; i++) {
+            // Check which pokemon name matches search input from user
+            if (allPokemonNamesAndUrl[i]['name'].toLowerCase().includes(searchText)) {
+                // Fetch searched pokemon
+                const url = allPokemonNamesAndUrl[i]['url'];
+                const response = await fetch(url);
+                const responseJSON = await response.json();
 
-    // Iterate through all Pokemon names and urls
-    for (let i = 0; i < allPokemonNamesAndUrl.length; i++) {
-        // Check which pokemon name matches search input from user
-        if (allPokemonNamesAndUrl[i]['name'].toLowerCase().includes(searchText)) {
-            // Fetch searched pokemon
-            const url = allPokemonNamesAndUrl[i]['url'];
-            const response = await fetch(url);
-            const responseJSON = await response.json();
-
-            // Push searched pokemon in extra array
-            searchedPokemon.push(responseJSON);
+                // Push searched pokemon in extra array
+                searchedPokemon.push(responseJSON);
+            }
         }
-    }
 
-    renderPokemon(searchedPokemon);
+        renderPokemon(searchedPokemon);
+    } else {
+        window.alert('Please enter at least 3 or more characters!')
+    }
 }
 
 // ####################################### MAIN #######################################
@@ -104,6 +105,7 @@ function loadMorePokemon() {
     }
 }
 
+// TODO Activate me after setFavoritePokemon() is fixed
 function saveToLocalStorage() {
     // Deactivated! To save all loaded pokemon in local storage will cause in an error because it's too big data
     // let loadedPokemonAsString = JSON.stringify(loadedPokemon);
@@ -113,6 +115,7 @@ function saveToLocalStorage() {
     // localStorage.setItem('favoritePokemon', favoritePokemonAsString);
 }
 
+// TODO Activate me after setFavoritePokemon() is fixed
 function loadFromLocalStorage() {
     // Deactivated! To save all loaded pokemon in local storage will cause in an error because it's too big data
     // let loadedPokemonAsString = localStorage.getItem('loadedPokemon');
@@ -155,26 +158,40 @@ function closePokemonDetails() {
     document.body.style.overflow = 'auto';
 }
 
-// TODO WIP
-function setFavoritePokemon(array, index, pokemonID) {
+function setFavoritePokemon(array, index, pokemonID) { // WIP because pokemonID is not used yet
+    // Checks if the property of the current object exists. If not set it to favorite to change it below
     if (array[index]['favorite'] == undefined) {
         array[index]['favorite'] = false;
     }
 
+    // FIXME If the user is on home, it is possible to "remove" the favorite but it is not deleted
+    // Changes current favorite status false = true / true = false
     array[index]['favorite'] = !array[index]['favorite'];
 
+    // Add Pokemon to favorites 
     if (array[index]['favorite'] == true) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
         favoritePokemon.push(loadedPokemon[index]);
 
         saveToLocalStorage();
-    } else {
-        // FIXME remove favorite status is buggy
-        document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
-        array[index]['favorite'] = false;
 
-        saveToLocalStorage();
-        renderPokemon(favoritePokemon);
+        // Remove Pokemon from favorites
+    } else {
+        // FIXME At the moment it is not possible to remove a Pokemon from favorites from home
+        // This is because there are 2 different arrays where a favorite can be set and removed
+        // The index of each array is different, which is the challenge to fix
+        // if (!userIsOnHome) prevents users to remove a Pokemon from favorites for now
+        if (!userIsOnHome) {
+            document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
+            array[index]['favorite'] = false;
+            array.splice(index, 1);
+
+            saveToLocalStorage();
+            closePokemonDetails();
+            renderPokemon(favoritePokemon);
+        } else {
+            window.alert('At the moment you can only get rid of me in the favorites!')
+        }
     }
 }
 
