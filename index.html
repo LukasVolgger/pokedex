@@ -27,12 +27,14 @@
                 </button>
                 <input type="text" id="search-input" class="search-input" placeholder="Search by Name" min="3" required>
             </form>
-            <button class="home-btn btns" onclick="home()" title="Home">
-                <img src="./img/icons/home.svg" alt="Favorites">
-            </button>
-            <button class="show-favorites-btn btns" onclick="showFavoritePokemon()" title="Favorites">
-                <img src="./img/icons/favorite_saved.svg" alt="Favorites">
-            </button>
+            <div class="site-contorls">
+                <button class="home-btn btns" onclick="home()" title="Home">
+                    <img src="./img/icons/home.svg" alt="Favorites">
+                </button>
+                <button class="show-favorites-btn btns" onclick="showFavoritePokemon()" title="Favorites">
+                    <img src="./img/icons/favorite_saved.svg" alt="Favorites">
+                </button>
+            </div>
         </nav>
     </header>
     <div id="pokemon-details-container" class="pokemon-details-container d-none">

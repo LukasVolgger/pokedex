@@ -4,7 +4,8 @@ body {
 }
 
 .border-spacing {
-    padding: 0 86px 0 86px;
+    padding-right: 86px;
+    padding-left: 86px;
 }
 
 .d-none {
@@ -22,7 +23,8 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 64px;
-    height: 25vh;
+    padding-top: 16px;
+    padding-bottom: 16px;
     background-image: url(./img/abstract_bg.jpg);
 }
 
@@ -36,15 +38,16 @@ header h1 {
 .search-bar {
     display: flex;
     align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     width: 25vw;
-    height: 48px;
 }
 
 .search-btn {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 4px;
     padding: 4px;
     border-radius: 50%;
     transition: all 225ms ease-in-out;
@@ -58,7 +61,7 @@ header h1 {
 }
 
 .search-bar img {
-    width: 54px;
+    width: 32px;
 }
 
 .search-input {
@@ -66,7 +69,6 @@ header h1 {
     width: 100%;
     height: 100%;
     background-color: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
 }
 
@@ -76,9 +78,11 @@ header h1 {
 
 nav {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 8px;
-    padding: 24px;
+    padding: 16px;
     background-color: rgb(54 54 54 / 50%);
     border-radius: 16px;
 }
@@ -210,6 +214,7 @@ nav {
     width: 50vw;
     max-width: 500px;
     height: 80vh;
+    max-height: 600px;
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
 }
@@ -358,3 +363,109 @@ nav {
 
 
 /* TODO Responsive webdesign */
+
+
+/* Extra extra small devices (phones, 360px and down) */
+
+@media only screen and (max-width: 360px) {
+    .border-spacing {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    header {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+        height: auto;
+    }
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .search-bar {
+        width: auto;
+    }
+    .pokedex-render-container {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .pokemon-details-card {
+        width: 100vw;
+        max-width: unset;
+        height: 100vh;
+        max-height: unset;
+        border-radius: 0;
+    }
+    .pokemon-stat-description {
+        width: 64px;
+    }
+}
+
+
+/* Extra small devices (phones, 360px and up) */
+
+@media only screen and (min-width: 360px) {
+    .border-spacing {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    header {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+    }
+    .search-bar {
+        width: auto;
+    }
+    .pokedex-render-container {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+    .pokemon-details-card {
+        width: 100vw;
+        max-width: unset;
+        height: 100vh;
+        max-height: unset;
+        border-radius: 0;
+    }
+    .pokemon-stat-description {
+        width: 64px;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {
+    .pokemon-details-card {
+        width: 80vw;
+        max-width: 500px;
+        height: 80vh;
+        max-height: 600px;
+        border-radius: 16px;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {
+    header {
+        flex-direction: row;
+        gap: 32px;
+        margin-bottom: 32px;
+    }
+    .search-bar {
+        width: auto;
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {}
