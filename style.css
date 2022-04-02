@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #0c0a1f;
+    background-color: #0a090e;
 }
 
 .border-spacing {
@@ -25,7 +25,8 @@ header {
     gap: 64px;
     padding-top: 16px;
     padding-bottom: 16px;
-    background-image: url(./img/abstract_bg.jpg);
+    background-image: url(./img/technology_bg3.jpg);
+    background-position: 17% 39%;
 }
 
 header h1 {
@@ -133,7 +134,7 @@ nav {
     justify-content: center;
     align-items: center;
     min-height: 152px;
-    background-image: url(./img/grass_bg.jpg);
+    background-image: url(./img/statistics_bg2.jpg);
     background-size: cover;
 }
 
