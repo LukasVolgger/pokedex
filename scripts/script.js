@@ -105,24 +105,22 @@ function loadMorePokemon() {
     }
 }
 
-// TODO Activate me after setFavoritePokemon() is fixed
 function saveToLocalStorage() {
     // Deactivated! To save all loaded pokemon in local storage will cause in an error because it's too big data
     // let loadedPokemonAsString = JSON.stringify(loadedPokemon);
     // localStorage.setItem('loadedPokemon', loadedPokemonAsString);
 
-    // let favoritePokemonAsString = JSON.stringify(favoritePokemon);
-    // localStorage.setItem('favoritePokemon', favoritePokemonAsString);
+    let favoritePokemonAsString = JSON.stringify(favoritePokemon);
+    localStorage.setItem('favoritePokemon', favoritePokemonAsString);
 }
 
-// TODO Activate me after setFavoritePokemon() is fixed
 function loadFromLocalStorage() {
     // Deactivated! To save all loaded pokemon in local storage will cause in an error because it's too big data
     // let loadedPokemonAsString = localStorage.getItem('loadedPokemon');
     // loadedPokemon = JSON.parse(loadedPokemonAsString) || [];
 
-    // let favoritePokemonAsString = localStorage.getItem('favoritePokemon');
-    // favoritePokemon = JSON.parse(favoritePokemonAsString) || [];
+    let favoritePokemonAsString = localStorage.getItem('favoritePokemon');
+    favoritePokemon = JSON.parse(favoritePokemonAsString) || [];
 }
 
 function renderPokemon(array) {
@@ -164,33 +162,35 @@ function setFavoritePokemon(array, index, pokemonID) { // WIP because pokemonID 
         array[index]['favorite'] = false;
     }
 
-    // FIXME If the user is on home, it is possible to "remove" the favorite but it is not deleted
     // Changes current favorite status false = true / true = false
     array[index]['favorite'] = !array[index]['favorite'];
 
     // Add Pokemon to favorites 
     if (array[index]['favorite'] == true) {
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
-        favoritePokemon.push(loadedPokemon[index]);
+        favoritePokemon.push(array[index]);
 
         saveToLocalStorage();
 
         // Remove Pokemon from favorites
     } else {
-        // FIXME At the moment it is not possible to remove a Pokemon from favorites from home
-        // This is because there are 2 different arrays where a favorite can be set and removed
-        // The index of each array is different, which is the challenge to fix
-        // if (!userIsOnHome) prevents users to remove a Pokemon from favorites for now
-        if (!userIsOnHome) {
-            document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite.svg';
-            array[index]['favorite'] = false;
-            array.splice(index, 1);
+        favoritePokemon.splice(getSavedPokemonIndex(pokemonID), 1);
+        closePokemonDetails();
 
-            saveToLocalStorage();
-            closePokemonDetails();
+        if (!userIsOnHome) {
             renderPokemon(favoritePokemon);
-        } else {
-            window.alert('At the moment you can only get rid of me in the favorites!')
+        }
+
+        saveToLocalStorage();
+    }
+}
+
+function getSavedPokemonIndex(pokemonID) {
+    for (let i = 0; i < favoritePokemon.length; i++) {
+        const pokemon = favoritePokemon[i];
+
+        if (pokemon['id'] == pokemonID) {
+            return favoritePokemon.indexOf(favoritePokemon[i]);
         }
     }
 }
@@ -207,6 +207,8 @@ function home() {
 function showFavoritePokemon() {
     // Prevent pagination to load more pokemon
     userIsOnHome = false;
+
+    activateFullscreen();
 
     if (favoritePokemon.length > 0) {
         renderPokemon(favoritePokemon);
@@ -239,6 +241,10 @@ function capitalize(string) {
     if (string) {
         return string.toUpperCase();
     }
+}
+
+function activateFullscreen() {
+    document.body.style = "height: 100vh;";
 }
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon
