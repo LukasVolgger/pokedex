@@ -16,11 +16,8 @@
 
 body {
     margin: 0;
-    /* background-color: #6c7fda; */
-    /* background-image: linear-gradient( 69deg, rgb(6 159 155) 5.5%, rgba(75, 68, 224, 0.74) 54.2%, rgba(64, 198, 238, 1) 55.2%, rgba(177, 36, 224, 1) 98.4%); */
-    /* background-image: linear-gradient( 90deg, rgba(173, 252, 234, 1) 26.8%, rgba(192, 229, 246, 1) 64%); */
+    height: 100vh;
     background-image: url(./img/technology_bg.jpg);
-    /* background-size: cover; */
 }
 
 .border-spacing {
@@ -40,16 +37,25 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 64px;
     padding-top: 16px;
     padding-bottom: 16px;
     min-height: 25vh;
-    /* background-image: linear-gradient( 122.3deg, rgba(111, 71, 133, 1) 14.6%, rgba(232, 129, 166, 1) 29.6%, rgba(237, 237, 183, 1) 42.1%, rgba(244, 166, 215, 1) 56.7%, rgba(154, 219, 232, 1) 68.7%, rgba(238, 226, 159, 1) 84.8%); */
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-    background-image: url(./img/grass_texture_bg_1024.jpg);
+    background-image: url(./img/abstract_bg.jpg);
     background-size: cover;
+}
+
+.header-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    background-color: rgb(255 255 255 / 38%);
+    padding: 16px;
+    border-radius: 8px;
 }
 
 header h1 {
@@ -62,7 +68,7 @@ header h1 {
 .search-bar {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 16px;
     width: 35vw;
 }
@@ -113,7 +119,7 @@ nav {
     padding: 8px;
     border-radius: 50%;
     transition: all 225ms ease-in-out;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
@@ -125,7 +131,7 @@ nav {
     padding: 8px;
     border-radius: 50%;
     transition: all 225ms ease-in-out;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
@@ -381,10 +387,12 @@ nav {
 .empty-text {
     color: #ed5564;
     font-size: 48px;
+    font-weight: 100;
+    text-align: center;
 }
 
 .empty-img {
-    width: 25vw;
+    width: 200px;
     filter: invert(42%) sepia(77%) saturate(2602%) hue-rotate(326deg) brightness(103%) contrast(86%);
 }
 
@@ -416,6 +424,10 @@ nav {
         justify-content: center;
         gap: 0;
         height: auto;
+    }
+    .header-banner {
+        flex-direction: column;
+        gap: 16px;
     }
     nav {
         flex-wrap: wrap;
@@ -455,6 +467,10 @@ nav {
         flex-direction: column;
         justify-content: center;
         gap: 0;
+    }
+    .header-banner {
+        flex-direction: column;
+        gap: 16px;
     }
     .search-bar {
         width: auto;
@@ -507,9 +523,12 @@ nav {
     }
     header {
         flex-direction: row;
-        justify-content: space-between;
         gap: 32px;
         margin-bottom: 32px;
+    }
+    .header-banner {
+        flex-direction: row;
+        gap: 32px;
     }
     .search-bar {
         width: 25vw;

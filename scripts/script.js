@@ -170,25 +170,25 @@ function setFavoritePokemon(array, index, pokemonID) { // WIP because pokemonID 
         document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
         favoritePokemon.push(array[index]);
 
-        saveToLocalStorage();
-
         // Remove Pokemon from favorites
     } else {
         favoritePokemon.splice(getSavedPokemonIndex(pokemonID), 1);
         closePokemonDetails();
 
+        // To prevent the render of the favorite Pokemon when the user is on home and removes a favorite Pokemon
         if (!userIsOnHome) {
             renderPokemon(favoritePokemon);
         }
-
-        saveToLocalStorage();
     }
+
+    saveToLocalStorage();
 }
 
 function getSavedPokemonIndex(pokemonID) {
     for (let i = 0; i < favoritePokemon.length; i++) {
         const pokemon = favoritePokemon[i];
 
+        // Returns the index of the favorite pokemon when the current pokemonID matches the ID in favoritePokemon array
         if (pokemon['id'] == pokemonID) {
             return favoritePokemon.indexOf(favoritePokemon[i]);
         }
@@ -207,8 +207,6 @@ function home() {
 function showFavoritePokemon() {
     // Prevent pagination to load more pokemon
     userIsOnHome = false;
-
-    activateFullscreen();
 
     if (favoritePokemon.length > 0) {
         renderPokemon(favoritePokemon);
@@ -241,10 +239,6 @@ function capitalize(string) {
     if (string) {
         return string.toUpperCase();
     }
-}
-
-function activateFullscreen() {
-    document.body.style = "height: 100vh;";
 }
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon
