@@ -16,9 +16,11 @@
 
 body {
     margin: 0;
-    background-color: #6c7fda;
+    /* background-color: #6c7fda; */
     /* background-image: linear-gradient( 69deg, rgb(6 159 155) 5.5%, rgba(75, 68, 224, 0.74) 54.2%, rgba(64, 198, 238, 1) 55.2%, rgba(177, 36, 224, 1) 98.4%); */
     /* background-image: linear-gradient( 90deg, rgba(173, 252, 234, 1) 26.8%, rgba(192, 229, 246, 1) 64%); */
+    background-image: url(./img/technology_bg.jpg);
+    /* background-size: cover; */
 }
 
 .border-spacing {
@@ -43,6 +45,7 @@ header {
     gap: 64px;
     padding-top: 16px;
     padding-bottom: 16px;
+    height: 25vh;
     /* background-image: linear-gradient( 122.3deg, rgba(111, 71, 133, 1) 14.6%, rgba(232, 129, 166, 1) 29.6%, rgba(237, 237, 183, 1) 42.1%, rgba(244, 166, 215, 1) 56.7%, rgba(154, 219, 232, 1) 68.7%, rgba(238, 226, 159, 1) 84.8%); */
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     background-image: url(./img/grass_texture_bg_1024.jpg);
@@ -61,7 +64,7 @@ header h1 {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 16px;
-    width: 25vw;
+    width: 35vw;
 }
 
 .search-btn {
@@ -102,7 +105,7 @@ nav {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 32px;
     border-radius: 16px;
 }
 
@@ -144,7 +147,7 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    border: 4px solid rgba(0, 0, 0, 0.8);
+    border: 4px solid rgb(255 255 255 / 80%);
     border-radius: 4px;
     min-width: 250px;
     min-height: 300px;
@@ -166,13 +169,13 @@ nav {
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 0px;
-    right: 0px;
-    font-size: 16px;
+    top: 8px;
+    right: 8px;
     color: #ffffff;
-    padding: 4px;
     background-color: rgba(0, 0, 0, 0.5);
     min-width: 48px;
+    border-radius: 12px;
+    padding: 8px;
 }
 
 .pokemon-img {
@@ -237,8 +240,7 @@ nav {
 .pokemon-details-card {
     width: 50vw;
     max-width: 500px;
-    height: 80vh;
-    max-height: 600px;
+    max-height: 580px;
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
 }
@@ -249,6 +251,12 @@ nav {
     position: relative;
     padding-top: 16px;
     margin-bottom: 16px;
+    background-image: url(./img/technology_bg3.jpg);
+    background-size: cover;
+    border-radius: 16px;
+    border-top: 4px solid rgba(0, 0, 0, 0.9);
+    border-right: 4px solid rgba(0, 0, 0, 0.9);
+    border-left: 4px solid rgba(0, 0, 0, 0.9);
 }
 
 .close-details-btn {
@@ -386,9 +394,6 @@ nav {
 }
 
 
-/* TODO Responsive webdesign */
-
-
 /* Extra extra small devices (phones, 360px and down) */
 
 @media only screen and (max-width: 360px) {
@@ -419,6 +424,9 @@ nav {
         height: 100vh;
         max-height: unset;
         border-radius: 0;
+    }
+    .pokemon-details-header {
+        height: 50vh;
     }
     .pokemon-stat-description {
         width: 64px;
@@ -452,6 +460,9 @@ nav {
         max-height: unset;
         border-radius: 0;
     }
+    .pokemon-details-header {
+        height: 50vh;
+    }
     .pokemon-stat-description {
         width: 64px;
     }
@@ -461,12 +472,18 @@ nav {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 
 @media only screen and (min-width: 600px) {
+    .border-spacing {
+        padding-right: 32px;
+        padding-left: 32px;
+    }
     .pokemon-details-card {
         width: 80vw;
         max-width: 500px;
-        height: 80vh;
-        max-height: 600px;
+        max-height: 580px;
         border-radius: 16px;
+    }
+    .pokemon-details-header {
+        height: unset;
     }
 }
 
@@ -474,20 +491,30 @@ nav {
 /* Medium devices (landscape tablets, 768px and up) */
 
 @media only screen and (min-width: 768px) {
+    .border-spacing {
+        padding-right: 64px;
+        padding-left: 64px;
+    }
     header {
         flex-direction: row;
+        justify-content: space-between;
         gap: 32px;
         margin-bottom: 32px;
     }
     .search-bar {
-        width: auto;
+        width: 25vw;
     }
 }
 
 
 /* Large devices (laptops/desktops, 992px and up) */
 
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+    .border-spacing {
+        padding-right: 96px;
+        padding-left: 96px;
+    }
+}
 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
