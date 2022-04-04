@@ -86,6 +86,8 @@ async function filterPokemon() {
 
                 // Push searched pokemon in extra array
                 searchedPokemon.push(responseJSON);
+            } else {
+                generateEmptyHTML();
             }
         }
 
