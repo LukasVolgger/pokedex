@@ -57,3 +57,5 @@ Navigate to the location on your computer where you downloaded/cloned the code. 
 ![readme_installation](https://user-images.githubusercontent.com/55922592/157415952-9cfe1da5-0872-4bf1-ad45-1bd942b9f7a9.PNG)
 
 <h2 id="license">License</h2>
+
+<a href="https://github.com/LukasVolgger/pokedex/blob/main/LICENSE">MIT License</a>
