@@ -122,7 +122,7 @@ nav {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 16px;
     border-radius: 16px;
 }
 
@@ -135,7 +135,7 @@ nav {
 }
 
 .home-btn img {
-    width: 48px;
+    width: 32px;
 }
 
 .show-favorites-btn {
@@ -147,7 +147,7 @@ nav {
 }
 
 .show-favorites-btn img {
-    width: 48px;
+    width: 32px;
 }
 
 .pokedex-render-container {
@@ -384,7 +384,8 @@ nav {
     color: white;
 }
 
-.pokemon-properties-description {
+.pokemon-properties-description,
+.pokemon-details-id {
     color: #ed5564;
 }
 
