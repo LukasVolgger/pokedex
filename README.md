@@ -17,19 +17,19 @@ Here is an overview of the most important functions of the project. Click on the
 
 <details><summary><b>Available Languages</b></summary>
   
-:white_check_mark: English <br>
+:heavy_check_mark: English <br>
   
 </details>
 
 <details><summary><b>Functionality</b></summary>
   
-:white_check_mark: All 1126 Pokémon are available <br>
-:white_check_mark: Pagination: 20 Pokémon are loaded. Scrolling all the way down will load another 20 Pokémon <br>
-:white_check_mark: Click on a Pokémon to see the details <br>
-:white_check_mark: Search all Pokémon <br>
-:white_check_mark: Save your favorite Pokémon <br>
-:white_check_mark: Favorite Pokémon are saved in local storage <br>
-:white_check_mark: Responsive Webdesign <br>
+:heavy_check_mark: All 1126 Pokémon are available <br>
+:heavy_check_mark: Pagination: 20 Pokémon are loaded. Scrolling all the way down will load another 20 Pokémon <br>
+:heavy_check_mark: Click on a Pokémon to see the details <br>
+:heavy_check_mark: Search all Pokémon <br>
+:heavy_check_mark: Save your favorite Pokémon <br>
+:heavy_check_mark: Favorite Pokémon are saved in local storage <br>
+:heavy_check_mark: Responsive Webdesign <br>
   
 </details>
 
