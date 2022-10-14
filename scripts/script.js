@@ -24,6 +24,7 @@ loadFromLocalStorage();
 function init() {
     loadPokemonPagination();
     loadAllPokemonNamesAndUrl();
+    autocomplete(document.getElementById("search-input"), allPokemonNamesAndUrl);
 }
 
 async function loadAllPokemonNamesAndUrl() {
@@ -267,6 +268,10 @@ function capitalize(string) {
     if (string) {
         return string.toUpperCase();
     }
+}
+
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon

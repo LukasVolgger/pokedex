@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style.css">
     <!-- Import Google Fonts END -->
-    <script src="./scripts/script.js"></script>
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/autocomplete.js"></script>
+    <script src="./scripts/script.js"></script>
 </head>
 
 <body onload="init()">
@@ -23,7 +24,7 @@
         <div class="header-banner">
             <h1>Pokédex</h1>
             <nav>
-                <form class="search-bar" onsubmit="filterPokemon(); return false">
+                <form autocomplete="off" class="search-bar" onsubmit="filterPokemon(); return false">
                     <button class="search-btn btn" onclick="" title="Find me!" type="submit">
                     <img src="./img/pokeball.svg" alt="Pokéball">
                 </button>
