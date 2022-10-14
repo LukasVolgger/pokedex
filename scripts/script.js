@@ -39,14 +39,30 @@ async function loadAllPokemonNamesAndUrl() {
     }
 }
 
-async function loadPokemonPagination() {
-    const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
-    const response = await fetch(url);
-    const responseJSON = await response.json();
+function mock() {
+    return new Promise(resolve => setTimeout(() => resolve({ json: () => Promise.resolve([1, 2, 3]) }), 2000));
+};
 
-    // console.log('Offset Response JSON: ', responseJSON);
-    // console.log('Offset Response JSON '[results']: ', responseJSON['results']);
-    getPokemonForPagination(responseJSON);
+async function loadPokemonPagination() {
+    try {
+        showLoadingScreen();
+
+        const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
+        const response = await fetch(url);
+        const responseJSON = await response.json();
+        getPokemonForPagination(responseJSON);
+
+        const res = await mock();
+        const states = await res.json();
+        console.log("fetching completes");
+        console.log("states:", states);
+    } catch (error) {
+        console.log(error.toString());
+    } finally {
+        setTimeout(() => {
+            hideLoadingScreen();
+        }, 1000)
+    }
 }
 
 async function getPokemonForPagination(responseJSON) {
@@ -95,6 +111,16 @@ async function filterPokemon() {
     } else {
         window.alert('Please enter at least 3 or more characters!')
     }
+}
+
+function showLoadingScreen() {
+    document.getElementById('loading-screen').classList.remove('d-none');
+    document.body.style = 'overflow: hidden';
+}
+
+function hideLoadingScreen() {
+    document.getElementById('loading-screen').classList.add('d-none');
+    document.body.style = 'overflow: auto';
 }
 
 // ####################################### MAIN #######################################
@@ -245,7 +271,7 @@ function capitalize(string) {
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon
 window.addEventListener('scroll', function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100) { // Add 100px offset for mobile devices
         // console.log('Scrolled to bottom');
         loadMorePokemon();
     }

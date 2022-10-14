@@ -428,6 +428,58 @@ nav {
     src: url('./fonts/pocket_monk.otf');
 }
 
+.loading-screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    text-align: center;
+    padding: 32px;
+}
+
+.loading-screen-headline {
+    font-family: 'pokemon-pocket-monk';
+    -webkit-text-stroke: 2px #395da9;
+    font-size: 64px;
+    color: #ffcb05;
+}
+
+.loading-screen-text {
+    font-family: 'pokemon-pocket-monk';
+    -webkit-text-stroke: 2px #395da9;
+    font-size: 48px;
+    color: #ffcb05;
+}
+
+.pokeball-loader {
+    width: 180px;
+    animation: loading-animation 1250ms infinite;
+}
+
+@keyframes loading-animation {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-50px) rotate(-15deg);
+    }
+    60% {
+        transform: translateY(-10px) rotate(15deg);
+    }
+}
+
 
 /* Extra extra small devices (phones, 360px and down) */
 
@@ -475,6 +527,9 @@ nav {
     .pokemon-stat-description {
         width: 64px;
     }
+    .pokeball-loader {
+        width: 120px;
+    }
 }
 
 
@@ -518,6 +573,9 @@ nav {
     .pokemon-stat-description {
         width: 64px;
     }
+    .pokeball-loader {
+        width: 120px;
+    }
 }
 
 
@@ -538,6 +596,9 @@ nav {
     }
     .pokemon-details-header {
         height: unset;
+    }
+    .pokeball-loader {
+        width: 140px;
     }
 }
 
@@ -560,6 +621,9 @@ nav {
     }
     .search-bar {
         width: 25vw;
+    }
+    .pokeball-loader {
+        width: 180px;
     }
 }
 
