@@ -37,6 +37,10 @@
     font-size: 12px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -437,18 +441,41 @@ nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .empty-text {
     color: #ed5564;
     font-size: 48px;
-    font-weight: 100;
+    font-weight: 600;
     text-align: center;
 }
 
 .empty-img {
-    width: 200px;
+    width: 360px;
     filter: invert(42%) sepia(77%) saturate(2602%) hue-rotate(326deg) brightness(103%) contrast(86%);
+}
+
+.btn-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    padding: 4px;
+}
+
+.btn-up:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 
@@ -624,6 +651,17 @@ nav {
     .pokeball-loader {
         width: 120px;
     }
+    .empty-text {
+        font-size: 32px;
+        font-weight: 600;
+    }
+    .empty-img {
+        width: 240px;
+    }
+    .btn-up {
+        right: -16px;
+        bottom: -16px;
+    }
 }
 
 
@@ -673,6 +711,17 @@ nav {
     .pokeball-loader {
         width: 120px;
     }
+    .empty-text {
+        font-size: 40px;
+        font-weight: 600;
+    }
+    .empty-img {
+        width: 280px;
+    }
+    .btn-up {
+        right: -16px;
+        bottom: -16px;
+    }
 }
 
 
@@ -700,6 +749,17 @@ nav {
     .pokeball-loader {
         width: 140px;
     }
+    .empty-text {
+        font-size: 48px;
+        font-weight: 600;
+    }
+    .empty-img {
+        width: 320px;
+    }
+    .btn-up {
+        right: -8px;
+        bottom: -8px;
+    }
 }
 
 
@@ -723,6 +783,13 @@ nav {
     }
     .pokeball-loader {
         width: 180px;
+    }
+    .empty-img {
+        width: 360px;
+    }
+    .btn-up {
+        right: 0x;
+        bottom: 0;
     }
 }
 

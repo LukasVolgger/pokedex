@@ -284,6 +284,13 @@ window.addEventListener('scroll', function() {
         // console.log('Scrolled to bottom');
         loadMorePokemon();
     }
+
+    // Show / Hide up-btn when user scrolls
+    if (window.pageYOffset >= 100) {
+        document.getElementById('btn-up').classList.remove('d-none');
+    } else {
+        document.getElementById('btn-up').classList.add('d-none');
+    }
 });
 
 // Track user keyboard
@@ -298,6 +305,12 @@ window.addEventListener('keydown', (e) => {
         closePokemonDetails();
     }
 });
+
+function scrollToTop() {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 200)
+}
 
 // ####################################### POKEMON PROPERTIES #######################################
 
