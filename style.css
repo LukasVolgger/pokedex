@@ -509,7 +509,7 @@ nav {
     right: 32px;
     /* right: 48px; */
     width: auto;
-    height: 250px;
+    max-height: 250px;
     overflow: auto;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
@@ -536,18 +536,18 @@ nav {
 .autocomplete-items div {
     padding: 10px;
     cursor: pointer;
-    background-color: #ffffff;
+    background-color: #395da9;
     border-bottom: 1px solid #d4d4d4;
     color: #ffcb05;
 }
 
 .autocomplete-items div:hover {
-    background-color: #395da9;
+    background-color: #4a7be7;
 }
 
 .autocomplete-active {
     /*when navigating through the items using the arrow keys:*/
-    background-color: #395da9 !important;
+    background-color: #4a7be7 !important;
     color: #ffffff;
 }
 

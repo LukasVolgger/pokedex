@@ -23,7 +23,7 @@ function autocomplete(inp, arr) {
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
                 b.innerHTML = "<strong>" + capitalizeFirstLetter(arr[i].name.substr(0, val.length)) + "</strong>";
-                b.innerHTML += arr[i].name.substr(val.length);
+                b.innerHTML += capitalizeAfterHyphen(arr[i].name.substr(val.length));
                 /*insert a input field that will hold the current array item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + capitalizeFirstLetter(arr[i].name) + "'>";
                 /*execute a function when someone clicks on the item value (DIV element):*/

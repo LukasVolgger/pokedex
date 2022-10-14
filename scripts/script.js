@@ -271,7 +271,11 @@ function capitalize(string) {
 }
 
 function capitalizeFirstLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return str.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase());
+}
+
+function capitalizeAfterHyphen(str) {
+    return str.replace(/-([a-z])/g, (_, char) => '-' + char.toUpperCase());
 }
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon
