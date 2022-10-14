@@ -21,7 +21,7 @@ function generatePokemonDetailsCardHTML(array, i) {
     return `
         <div class="pokemon-details-card">
             <div class="pokemon-details-header">
-                <button onclick="closePokemonDetails()" class="close-details-btn btns" title="Close!">
+                <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close!">
                     <img src="./img/icons/close.svg" alt="Close">
                 </button>
                 <img src="${getPokemonImg(array, i)}" alt="No Image found!" class="pokemon-img pokemon-details-img">
@@ -30,7 +30,7 @@ function generatePokemonDetailsCardHTML(array, i) {
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
                     <span class="pokemon-details-id">#${getPokemonID(array, i)}</span>
-                    <button class="favorite-btn btns" title="Save me!" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
+                    <button class="favorite-btn btn" title="Save me!" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
                         <img src="${getPokemonFavoriteState(array, i)}" alt="Favorite" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
