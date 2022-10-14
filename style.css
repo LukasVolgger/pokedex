@@ -80,6 +80,16 @@ header {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.credits a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.credits a:hover {
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .header-banner {
     display: flex;
     flex-direction: column;
