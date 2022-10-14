@@ -81,8 +81,8 @@ async function getPokemonForPagination(responseJSON) {
 }
 
 async function filterPokemon() {
-    // Prevent pagination to load more pokemon
-    userIsOnHome = false;
+    searchedPokemon = []; // Clear previous search results
+    userIsOnHome = false; // Prevent pagination to load more pokemon
 
     // Get search input from user
     let searchText = document.getElementById('search-input').value.toLowerCase();
