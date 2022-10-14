@@ -22,7 +22,7 @@
 <body onload="init()">
     <header class="border-spacing" id="header">
         <div class="header-banner">
-            <h1>Pokédex</h1>
+            <h1 class="headline">Pokédex</h1>
             <nav>
                 <form autocomplete="off" class="search-bar" onsubmit="filterPokemon(); return false">
                     <button class="search-btn btn" onclick="" title="Find me!" type="submit">
@@ -39,8 +39,8 @@
                 </button>
                 </div>
             </nav>
+            <div class="credits hide-mobile">Pokédex 2022 | Created by Lukas Volgger | API: https://pokeapi.co/</div>
         </div>
-        <div class="credits hide-mobile">Pokédex 2022 | Created by Lukas Volgger | API: https://pokeapi.co/</div>
     </header>
     <div id="pokemon-details-container" class="pokemon-details-container d-none">
         <!-- Pokemon details are rendered here -->

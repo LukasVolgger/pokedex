@@ -21,23 +21,26 @@
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
     /* Firefox */
 }
 
  :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
 }
 
  ::-ms-input-placeholder {
     /* Microsoft Edge */
     color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
 }
 
 body {
     margin: 0;
     height: 100vh;
-    background-image: url(./img/technology_bg.jpg);
+    background-image: url('./img/technology_bg.jpg');
 }
 
 .border-spacing {
@@ -65,34 +68,34 @@ header {
     padding-bottom: 42px;
     min-height: 25vh;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-    background-image: url(./img/abstract_bg.jpg);
+    background-image: url('./img/abstract_bg.jpg');
     background-size: cover;
 }
 
 .credits {
-    position: absolute;
-    bottom: 8px;
-    font-size: 12px;
     padding: 4px;
     border-radius: 4px;
     color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
 .header-banner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
-    background-color: rgb(255 255 255 / 38%);
+    gap: 16px;
+    /* background-color: rgb(255 255 255 / 38%); */
     padding: 16px;
     border-radius: 8px;
 }
 
-header h1 {
+.headline {
     font-family: 'pokemon-pocket-monk';
     -webkit-text-stroke: 2px #395da9;
-    font-size: 64px;
+    font-size: 96px;
+    margin: 0;
     color: #ffcb05;
 }
 
@@ -132,6 +135,10 @@ header h1 {
     height: 100%;
     background-color: transparent;
     color: white;
+}
+
+.search-input:focus::placeholder {
+    color: transparent;
 }
 
 .search-input:focus {
@@ -194,7 +201,7 @@ nav {
 
 .pokedex-card:hover {
     border: 4px solid #ffcb05;
-    filter: brightness(1.2) saturate(1.2);
+    filter: brightness(1.1) saturate(1.1);
 }
 
 .pokedex-card-header {
@@ -203,7 +210,7 @@ nav {
     justify-content: center;
     align-items: center;
     min-height: 152px;
-    background-image: url(./img/statistics_bg2.jpg);
+    background-image: url('./img/statistics_bg2.jpg');
     background-size: cover;
 }
 
@@ -294,7 +301,7 @@ nav {
     position: relative;
     padding-top: 16px;
     margin-bottom: 16px;
-    background-image: url(./img/technology_bg3.jpg);
+    background-image: url('./img/technology_bg3.jpg');
     background-size: cover;
     border-radius: 16px;
     border-top: 4px solid rgba(0, 0, 0, 0.9);
@@ -577,6 +584,9 @@ nav {
         flex-direction: column;
         gap: 16px;
     }
+    .headline {
+        font-size: 64px;
+    }
     nav {
         flex-wrap: wrap;
         justify-content: center;
@@ -623,6 +633,9 @@ nav {
         gap: 0;
         padding-bottom: 32px;
     }
+    .headline {
+        font-size: 64px;
+    }
     .header-banner {
         flex-direction: column;
         gap: 16px;
@@ -662,6 +675,9 @@ nav {
     header {
         padding-bottom: 42px;
     }
+    .headline {
+        font-size: 80px;
+    }
     .pokemon-details-card {
         width: 80vw;
         max-width: 500px;
@@ -689,9 +705,8 @@ nav {
         gap: 32px;
         margin-bottom: 32px;
     }
-    .header-banner {
-        flex-direction: row;
-        gap: 32px;
+    .headline {
+        font-size: 96px;
     }
     .search-bar {
         width: 25vw;
