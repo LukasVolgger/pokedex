@@ -286,6 +286,19 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Track user keyboard
+window.addEventListener('keydown', (e) => {
+    // console.log(e);
+
+    if (e.key == 'Enter') {
+        filterPokemon();
+    }
+
+    if (e.key == 'Escape') {
+        closePokemonDetails();
+    }
+});
+
 // ####################################### POKEMON PROPERTIES #######################################
 
 function getPokemonProperties(array, index, property) {
