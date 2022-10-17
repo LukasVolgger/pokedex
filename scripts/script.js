@@ -171,6 +171,7 @@ function renderPokemon(array) {
 function showPokemonDetails(array, index) {
     // Prevent user to scroll when pokemon details are open
     document.body.style.overflow = 'hidden';
+    document.getElementById('btn-up').classList.add('d-none');
 
     let container = document.getElementById('pokemon-details-container');
     container.classList.remove('d-none');
@@ -183,6 +184,7 @@ function closePokemonDetails() {
     container.innerHTML = '';
 
     document.body.style.overflow = 'auto';
+    document.getElementById('btn-up').classList.remove('d-none');
 }
 
 function setFavoritePokemon(array, index, pokemonID) { // WIP because pokemonID is not used yet
