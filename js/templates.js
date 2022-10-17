@@ -34,7 +34,7 @@ function generatePokemonDetailsCardHTML(array, i) {
         <div class="pokemon-details-card">
             <div class="pokemon-details-header">
                 <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close!">
-                    <img src="./img/icons/close.svg" alt="Close">
+                    <img src="./assets/img/icons/close.svg" alt="Close">
                 </button>
                 <img src="${getPokemonImg(array, i)}" alt="No Image found!" class="pokemon-img pokemon-details-img">
             </div>
@@ -115,7 +115,7 @@ function generateEmptyHTML() {
     return `
         <div class="empty-container">
             <span class="empty-text">Uh Oh...</span>
-            <img src="./img/psyduck.png" ald="Empty" class="empty-img">
+            <img src="./assets/img/psyduck.png" ald="Empty" class="empty-img">
             <span class="empty-text">Nothing to see here :(</span>
         </div>
     `;

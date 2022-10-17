@@ -2,17 +2,17 @@
 
 @font-face {
     font-family: 'pokemon-hollow';
-    src: url('./fonts/pokemon_hollow.ttf');
+    src: url('./assets/fonts/pokemon_hollow.ttf');
 }
 
 @font-face {
     font-family: 'pokemon-solid';
-    src: url('./fonts/pokemon_solid.ttf');
+    src: url('./assets/fonts/pokemon_solid.ttf');
 }
 
 @font-face {
     font-family: 'pokemon-pocket-monk';
-    src: url('./fonts/pocket_monk.otf');
+    src: url('./assets/fonts/pocket_monk.otf');
 }
 
 
@@ -44,7 +44,7 @@ html {
 body {
     margin: 0;
     height: 100vh;
-    background-image: url('./img/technology_bg.jpg');
+    background-image: url('./assets/img/technology_bg.jpg');
 }
 
 .border-spacing {
@@ -72,7 +72,7 @@ header {
     padding-bottom: 42px;
     min-height: 25vh;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-    background-image: url('./img/abstract_bg.jpg');
+    background-image: url('./assets/img/abstract_bg.jpg');
     background-size: cover;
 }
 
@@ -224,7 +224,7 @@ nav {
     justify-content: center;
     align-items: center;
     min-height: 152px;
-    background-image: url('./img/statistics_bg2.jpg');
+    background-image: url('./assets/img/statistics_bg2.jpg');
     background-size: cover;
 }
 
@@ -315,7 +315,7 @@ nav {
     position: relative;
     padding-top: 16px;
     margin-bottom: 16px;
-    background-image: url('./img/technology_bg3.jpg');
+    background-image: url('./assets/img/technology_bg3.jpg');
     background-size: cover;
     border-radius: 16px;
     border-top: 4px solid rgba(0, 0, 0, 0.9);

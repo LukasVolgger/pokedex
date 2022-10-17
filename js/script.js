@@ -251,7 +251,7 @@ function setFavoritePokemon(array, index, pokemonID) {
 
     // Add Pokemon to favorites 
     if (array[index]['favorite'] == true) {
-        document.getElementById(`fav-icon-pokemon-index-${index}`).src = './img/icons/favorite_saved.svg';
+        document.getElementById(`fav-icon-pokemon-index-${index}`).src = './assets/img/icons/favorite_saved.svg';
         favoritePokemon.push(array[index]);
 
         // Remove Pokemon from favorites
@@ -445,7 +445,7 @@ function getPokemonImg(array, index) {
     if (array[index]['sprites']['other']['official-artwork']['front_default']) {
         return array[index]['sprites']['other']['official-artwork']['front_default'];
     } else {
-        return './img/no_image.svg';
+        return './assets/img/no_image.svg';
     }
 }
 
@@ -599,8 +599,8 @@ function getPokemonAbilities(array, index, abilityIndex) {
  */
 function getPokemonFavoriteState(array, index) {
     if (array[index]['favorite'] == true) {
-        return './img/icons/favorite_saved.svg';
+        return './assets/img/icons/favorite_saved.svg';
     } else {
-        return './img/icons/favorite.svg';
+        return './assets/img/icons/favorite.svg';
     }
 }
