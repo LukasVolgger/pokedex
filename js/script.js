@@ -71,10 +71,10 @@ async function loadPokemonPagination() {
 
         const res = await mock();
         const states = await res.json();
-        console.log("fetching completes");
-        console.log("states:", states);
+        // console.log("fetching completes");
+        // console.log("states:", states);
     } catch (error) {
-        console.log(error.toString());
+        // console.log(error.toString());
     } finally {
         setTimeout(() => {
             hideLoadingScreen();
