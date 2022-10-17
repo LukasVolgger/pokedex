@@ -401,6 +401,9 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
+/**
+ * Scrolls to the top of the page
+ */
 function scrollToTop() {
     setTimeout(() => {
         window.scrollTo(0, 0);
