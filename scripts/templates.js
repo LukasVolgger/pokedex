@@ -1,3 +1,9 @@
+/**
+ * Help function: Returns HTML code
+ * @param {Array} array The array with the Pokémon
+ * @param {number} i The current Pokémon
+ * @returns HTML-Code
+ */
 function generatePokedexCardHTML(array, i) {
     return `
             <div class="pokedex-card" onclick="showPokemonDetails(${getArrayNameAsString(array)}, ${i})"> 
@@ -17,6 +23,12 @@ function generatePokedexCardHTML(array, i) {
         `;
 }
 
+/**
+ * Help function: Returns HTML code
+ * @param {Array} array The array with the Pokémon
+ * @param {number} i The current Pokémon
+ * @returns HTML-Code
+ */
 function generatePokemonDetailsCardHTML(array, i) {
     return `
         <div class="pokemon-details-card">
@@ -95,6 +107,10 @@ function generatePokemonDetailsCardHTML(array, i) {
     `;
 }
 
+/**
+ * Help function: Returns HTML code
+ * @returns HTML-Code
+ */
 function generateEmptyHTML() {
     return `
         <div class="empty-container">

@@ -1,3 +1,9 @@
+/**
+ * Autocomplete function from W3Schools
+ * https://www.w3schools.com/howto/howto_js_autocomplete.asp
+ * @param {string} inp 
+ * @param {Array} arr 
+ */
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/

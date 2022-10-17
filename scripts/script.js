@@ -11,8 +11,8 @@ let numberOfAllPokemon = 1126;
 let allPokemonNamesAndUrl = [];
 
 // Save Pokemon
-let loadedPokemon = []; // Stores all Pokemon which were loaded before from pagination or filter
-let searchedPokemon = []; // Stores all Pokemon which were already filtered by user
+let loadedPokemon = []; // Stores all Pokémon which were loaded before from pagination or filter
+let searchedPokemon = []; // Stores all Pokémon which were already filtered by user
 let favoritePokemon = [];
 
 let userIsOnHome = true;
@@ -21,12 +21,20 @@ let userIsOnHome = true;
 
 loadFromLocalStorage();
 
+/**
+ * Initializes the app, fetches the first 25 Pokémon and displays them
+ * loadAllPokemonNamesAndUrl(); is called that the search works
+ */
 function init() {
     loadPokemonPagination();
     loadAllPokemonNamesAndUrl();
     autocomplete(document.getElementById("search-input"), allPokemonNamesAndUrl);
 }
 
+/**
+ * All names and the URLs of the Pokémon are fetched and stored in the array allPokemonNamesAndUrl
+ * The names and URLs are needed for the search function
+ */
 async function loadAllPokemonNamesAndUrl() {
     const url = `https://pokeapi.co/api/v2/pokemon/?limit=${numberOfAllPokemon}`;
     const response = await fetch(url);
@@ -40,10 +48,18 @@ async function loadAllPokemonNamesAndUrl() {
     }
 }
 
+/**
+ * https://stackoverflow.com/questions/72386863/how-to-show-and-hide-loader-while-using-fetch-in-javascript
+ * @returns Promise
+ */
 function mock() {
     return new Promise(resolve => setTimeout(() => resolve({ json: () => Promise.resolve([1, 2, 3]) }), 2000));
 };
 
+/**
+ * Fetches more Pokémon when the user has scrolled to the bottom of the page
+ * Standard settings: offset = 0; let limit = 25
+ */
 async function loadPokemonPagination() {
     try {
         showLoadingScreen();
@@ -66,6 +82,10 @@ async function loadPokemonPagination() {
     }
 }
 
+/**
+ * Iterates through the response of loadPokemonPagination() and stores each Pokemon in the array loadedPokemon.
+ * @param {JSON} responseJSON 
+ */
 async function getPokemonForPagination(responseJSON) {
     // The response from loadPokemonPagination() stores the pokemon in ['results']. Now we get each of the pokemon 
     for (let i = 0; i < responseJSON['results'].length; i++) {
@@ -114,11 +134,17 @@ async function filterPokemon() {
     }
 }
 
+/**
+ * Shows the loading screen
+ */
 function showLoadingScreen() {
     document.getElementById('loading-screen').classList.remove('d-none');
     document.body.style = 'overflow: hidden';
 }
 
+/**
+ * Hides the loading screen
+ */
 function hideLoadingScreen() {
     document.getElementById('loading-screen').classList.add('d-none');
     document.body.style = 'overflow: auto';
@@ -126,6 +152,9 @@ function hideLoadingScreen() {
 
 // ####################################### MAIN #######################################
 
+/**
+ * Loads more Pokemon
+ */
 function loadMorePokemon() {
     // Check if user is on home. This function should not be called on favorite-site or when pokemon are filtered
     if (userIsOnHome) {
@@ -134,6 +163,9 @@ function loadMorePokemon() {
     }
 }
 
+/**
+ * Saves data to the localStorage
+ */
 function saveToLocalStorage() {
     // Deactivated! To save all loaded pokemon in local storage will cause in an error because it's too big data
     // let loadedPokemonAsString = JSON.stringify(loadedPokemon);
@@ -143,6 +175,9 @@ function saveToLocalStorage() {
     localStorage.setItem('favoritePokemon', favoritePokemonAsString);
 }
 
+/**
+ * Loads data from localStorage
+ */
 function loadFromLocalStorage() {
     // Deactivated! To save all loaded pokemon in local storage will cause in an error because it's too big data
     // let loadedPokemonAsString = localStorage.getItem('loadedPokemon');
@@ -152,6 +187,10 @@ function loadFromLocalStorage() {
     favoritePokemon = JSON.parse(favoritePokemonAsString) || [];
 }
 
+/**
+ * Renders the Pokémon depending on which array is sent through the function
+ * @param {Array} array 
+ */
 function renderPokemon(array) {
     // Get render container and clear it
     let container = document.getElementById('pokedex-render-container');
@@ -168,6 +207,11 @@ function renderPokemon(array) {
     }
 }
 
+/**
+ * Opens the clicked Pokémon and shows its details
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon (to be opened)
+ */
 function showPokemonDetails(array, index) {
     // Prevent user to scroll when pokemon details are open
     document.body.style.overflow = 'hidden';
@@ -178,6 +222,9 @@ function showPokemonDetails(array, index) {
     container.innerHTML = generatePokemonDetailsCardHTML(array, index);
 }
 
+/**
+ * Closes the opened Pokémon
+ */
 function closePokemonDetails() {
     let container = document.getElementById('pokemon-details-container');
     container.classList.add('d-none');
@@ -187,7 +234,13 @@ function closePokemonDetails() {
     document.getElementById('btn-up').classList.remove('d-none');
 }
 
-function setFavoritePokemon(array, index, pokemonID) { // WIP because pokemonID is not used yet
+/**
+ * Sets a Pokémon as a favorite for the user and stores it in the localStorage
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @param {number} pokemonID The ID of the saved Pokémon
+ */
+function setFavoritePokemon(array, index, pokemonID) {
     // Checks if the property of the current object exists. If not set it to favorite to change it below
     if (array[index]['favorite'] == undefined) {
         array[index]['favorite'] = false;
@@ -215,6 +268,11 @@ function setFavoritePokemon(array, index, pokemonID) { // WIP because pokemonID 
     saveToLocalStorage();
 }
 
+/**
+ * Iterates through the stored Pokémon and compares if the actual ID of the Pokémon matches pokemonID. If yes, returns the index of the array
+ * @param {number} pokemonID The ID of the saved Pokémon
+ * @returns The index of the array from the stored Pokémon
+ */
 function getSavedPokemonIndex(pokemonID) {
     for (let i = 0; i < favoritePokemon.length; i++) {
         const pokemon = favoritePokemon[i];
@@ -226,6 +284,9 @@ function getSavedPokemonIndex(pokemonID) {
     }
 }
 
+/**
+ * "Navigates" back to the home page, displays the first 25 Pokémon and deletes the filtered Pokémon
+ */
 function home() {
     userIsOnHome = true;
 
@@ -235,6 +296,9 @@ function home() {
     renderPokemon(loadedPokemon);
 }
 
+/**
+ * "Navigates" to the favorite Pokem
+ */
 function showFavoritePokemon() {
     // Prevent pagination to load more pokemon
     userIsOnHome = false;
@@ -246,6 +310,11 @@ function showFavoritePokemon() {
     }
 }
 
+/**
+ * Used to add in the HTML templates to the onclick="" attribute with the name of the array instead of the object.
+ * @param {Array} array The array with the Pokémon
+ * @returns The name of the passed array
+ */
 function getArrayNameAsString(array) {
     let arrayNameAsString;
 
@@ -266,16 +335,31 @@ function getArrayNameAsString(array) {
     return arrayNameAsString;
 }
 
-function capitalize(string) {
-    if (string) {
-        return string.toUpperCase();
+/**
+ * Changes a passed string to uppercase letters
+ * @param {string} string 
+ * @returns string
+ */
+function capitalize(str) {
+    if (str) {
+        return str.toUpperCase();
     }
 }
 
+/**
+ * Changes the first letter of a passed string to an uppercase letter
+ * @param {string} str 
+ * @returns string
+ */
 function capitalizeFirstLetter(str) {
     return str.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase());
 }
 
+/**
+ * Changes the first letter after a hyphen of a passed string to an uppercase letter
+ * @param {string} str 
+ * @returns string
+ */
 function capitalizeAfterHyphen(str) {
     return str.replace(/-([a-z])/g, (_, char) => '-' + char.toUpperCase());
 }
@@ -316,15 +400,33 @@ function scrollToTop() {
 
 // ####################################### POKEMON PROPERTIES #######################################
 
+/**
+ * Returns the properties of the Pokémon based on the passed property as a string
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @param {string} property The property of the Pokémon ('height', 'weight')
+ * @returns The properties of the Pokémon as a number (height/weight)
+ */
 function getPokemonProperties(array, index, property) {
-    // Useful for all properties in first level of array (Height, weight)
     return array[index][property];
 }
 
+/**
+ * Returns the ID of the Pokémon
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @returns The ID of the Pokémon
+ */
 function getPokemonID(array, index) {
     return array[index]['id'];
 }
 
+/**
+ * Returns the name of the Pokémon
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon 
+ * @returns The name of the Pokémon as string
+ */
 function getPokemonName(array, index) {
     let name = array[index]['name'];
 
@@ -333,6 +435,12 @@ function getPokemonName(array, index) {
     return name.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase());
 }
 
+/**
+ * Returns the URL of the image of the respective Pokémon
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon 
+ * @returns The URL of the image 
+ */
 function getPokemonImg(array, index) {
     if (array[index]['sprites']['other']['official-artwork']['front_default']) {
         return array[index]['sprites']['other']['official-artwork']['front_default'];
@@ -341,6 +449,13 @@ function getPokemonImg(array, index) {
     }
 }
 
+/**
+ * Returns the type of the Pokémon as a string
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @param {number} typeIndex The index of the type. Each Pokémon has either 1 or 2 types
+ * @returns The types of the Pokémon as a string
+ */
 function getPokemonType(array, index, typeIndex) {
     // Some pokemon have to types: Type 1 = typeIndex 0, type 2 = typeIndex 1
     if (array[index]['types'][typeIndex]) {
@@ -351,10 +466,24 @@ function getPokemonType(array, index, typeIndex) {
     }
 }
 
+/**
+ * Returns the name of the Pokémon's statistics
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @param {number} stat The index of the statistic. Each Pokémon has 6 statistics
+ * @returns The name of the Pokémon's statistics as string
+ */
 function getPokemonStat(array, index, stat) {
     return array[index]['stats'][stat]['base_stat'];
 }
 
+/**
+ * Returns the value of the statistic of the respective Pokémon as number
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @param {number} stat The index of the statistic. Each Pokémon has 6 statistics
+ * @returns The value of the statistic of the Pokémon as number
+ */
 function getPokemonStatPercent(array, index, stat) {
     // There has to be a cap of each stat. After some research, this was the maximum i found
     let maxStat = 255;
@@ -364,6 +493,11 @@ function getPokemonStatPercent(array, index, stat) {
     return (stats / maxStat) * 100;
 }
 
+/**
+ * Returns the hex color code of the respective passed type of Pokémon
+ * @param {string} type The type of Pokémon as string
+ * @returns 
+ */
 function getPokemonTypeHexColor(type) {
     switch (type) {
         case 'normal':
@@ -440,6 +574,13 @@ function getPokemonTypeHexColor(type) {
     }
 }
 
+/**
+ * Returns the Pokémon's ability as a string
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @param {number} abilityIndex The index of the ability
+ * @returns The Pokémon's ability as a string
+ */
 function getPokemonAbilities(array, index, abilityIndex) {
     // Some pokemon have more then one ability: Ability 1 = abilityIndex 0, ability 2 = abilityIndex 1 and ability 3 = abilityIndex 2
     if (array[index]['abilities'][abilityIndex]) {
@@ -450,6 +591,12 @@ function getPokemonAbilities(array, index, abilityIndex) {
     }
 }
 
+/**
+ * Check if the Pokemon has been favored and if so, fill in the Fav-Star
+ * @param {Array} array The array with the Pokémon
+ * @param {number} index The current Pokémon
+ * @returns The URL of the image with the favorite star (Either filled or not)
+ */
 function getPokemonFavoriteState(array, index) {
     if (array[index]['favorite'] == true) {
         return './img/icons/favorite_saved.svg';
