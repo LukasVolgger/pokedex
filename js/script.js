@@ -16,6 +16,7 @@ let searchedPokemon = []; // Stores all Pokémon which were already filtered by 
 let favoritePokemon = [];
 
 let userIsOnHome = true;
+let pokemonDetailsOpen = false;
 
 // ####################################### INIT, FETCH API #######################################
 
@@ -213,6 +214,8 @@ function renderPokemon(array) {
  * @param {number} index The current Pokémon (to be opened)
  */
 function showPokemonDetails(array, index) {
+    pokemonDetailsOpen = true;
+
     // Prevent user to scroll when pokemon details are open
     document.body.style.overflow = 'hidden';
     document.getElementById('btn-up').classList.add('d-none');
@@ -226,6 +229,8 @@ function showPokemonDetails(array, index) {
  * Closes the opened Pokémon
  */
 function closePokemonDetails() {
+    pokemonDetailsOpen = false;
+
     let container = document.getElementById('pokemon-details-container');
     container.classList.add('d-none');
     container.innerHTML = '';
@@ -257,10 +262,14 @@ function setFavoritePokemon(array, index, pokemonID) {
         // Remove Pokemon from favorites
     } else {
         favoritePokemon.splice(getSavedPokemonIndex(pokemonID), 1);
-        closePokemonDetails();
+
+        if (userIsOnHome) {
+            showPokemonDetails(array, index);
+        }
 
         // To prevent the render of the favorite Pokemon when the user is on home and removes a favorite Pokemon
         if (!userIsOnHome) {
+            closePokemonDetails();
             renderPokemon(favoritePokemon);
         }
     }
@@ -372,7 +381,7 @@ window.addEventListener('scroll', function() {
     }
 
     // Show / Hide up-btn when user scrolls
-    if (window.pageYOffset >= 100) {
+    if (window.pageYOffset >= 100 && !pokemonDetailsOpen) {
         document.getElementById('btn-up').classList.remove('d-none');
     } else {
         document.getElementById('btn-up').classList.add('d-none');
