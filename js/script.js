@@ -236,7 +236,10 @@ function closePokemonDetails() {
     container.innerHTML = '';
 
     document.body.style.overflow = 'auto';
-    document.getElementById('btn-up').classList.remove('d-none');
+
+    if (upBtnVisible()) {
+        document.getElementById('btn-up').classList.remove('d-none');
+    }
 }
 
 /**
@@ -381,7 +384,7 @@ window.addEventListener('scroll', function() {
     }
 
     // Show / Hide up-btn when user scrolls
-    if (window.pageYOffset >= 100 && !pokemonDetailsOpen) {
+    if (upBtnVisible()) {
         document.getElementById('btn-up').classList.remove('d-none');
     } else {
         document.getElementById('btn-up').classList.add('d-none');
@@ -408,6 +411,14 @@ function scrollToTop() {
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, 200)
+}
+
+/**
+ * Check if the up-button should be visible
+ * @returns true/false
+ */
+function upBtnVisible() {
+    return window.pageYOffset >= 100 && !pokemonDetailsOpen;
 }
 
 // ####################################### POKEMON PROPERTIES #######################################
