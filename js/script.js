@@ -378,7 +378,7 @@ function capitalizeAfterHyphen(str) {
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon
 window.addEventListener('scroll', function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100) { // Add 100px offset for mobile devices
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
         // console.log('Scrolled to bottom');
         loadMorePokemon();
     }
