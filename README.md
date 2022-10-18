@@ -35,15 +35,15 @@ Here is an overview of the most important functions of the project. Click on the
 
 <h2 id="preview">Preview</h2>
 
-![This is an image](/img/preview/preview_main.png)
+![This is an image](./assets/img/preview/preview_main.png)
 
 ---
 
-![This is an image](/img/preview/preview_details.png)
+![This is an image](./assets/img/preview/preview_details.png)
 
 ---
 
-![This is an image](/img/preview/preview_favorites.png)
+![This is an image](./assets/img/preview/preview_favorites.png)
 
 
 <h2 id="installation">Installation</h2>
