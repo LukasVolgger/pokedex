@@ -5,6 +5,7 @@
 // Pagination Settings
 let offset = 0;
 let limit = 25;
+let pokemonLoading = false;
 
 // All Pokemon names and url 
 let numberOfAllPokemon = 1126;
@@ -64,6 +65,7 @@ function mock() {
 async function loadPokemonPagination() {
     try {
         showLoadingScreen();
+        pokemonLoading = true;
 
         const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
         const response = await fetch(url);
@@ -80,6 +82,8 @@ async function loadPokemonPagination() {
         setTimeout(() => {
             hideLoadingScreen();
         }, 1000)
+
+        pokemonLoading = false;
     }
 }
 
@@ -378,7 +382,7 @@ function capitalizeAfterHyphen(str) {
 
 // Track scrolling and when user scrolled to bottom of pagination, load more pokemon
 window.addEventListener('scroll', function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100 && !pokemonLoading) {
         // console.log('Scrolled to bottom');
         loadMorePokemon();
     }
