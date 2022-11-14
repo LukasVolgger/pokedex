@@ -21,7 +21,30 @@ let pokemonDetailsOpen = false;
 
 // ####################################### INIT, FETCH API #######################################
 
+preloadImages();
 loadFromLocalStorage();
+
+/**
+ * Help function to preload all images
+ */
+function preloadImages() {
+    preloadImage('./assets/img/abstract_bg.jpg');
+    preloadImage('./assets/img/no_image.svg');
+    preloadImage('./assets/img/pokeball.svg');
+    preloadImage('./assets/img/psyduck.png');
+    preloadImage('./assets/img/statistics_bg2.jpg');
+    preloadImage('./assets/img/technology_bg.jpg');
+    preloadImage('./assets/img/technology_bg3.jpg');
+}
+
+/**
+ * Creates a new object for the passed image
+ * @param {string} url The path of the single image
+ */
+function preloadImage(url) {
+    const img = new Image();
+    img.src = url;
+}
 
 /**
  * Initializes the app, fetches the first 25 Pokémon and displays them
@@ -388,7 +411,7 @@ window.addEventListener('scroll', function() {
     }
 
     // Show / Hide up-btn when user scrolls
-    if (upBtnVisible()) {
+    if (upBtnVisible() && !pokemonLoading) {
         document.getElementById('btn-up').classList.remove('d-none');
     } else {
         document.getElementById('btn-up').classList.add('d-none');
