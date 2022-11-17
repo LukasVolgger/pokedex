@@ -19,6 +19,10 @@ let favoritePokemon = [];
 let userIsOnHome = true;
 let pokemonDetailsOpen = false;
 
+// Touch controls
+let xDown = null;
+let yDown = null;
+
 // ####################################### INIT, FETCH API #######################################
 
 preloadImages();
@@ -498,6 +502,46 @@ function scrollToTop() {
 function upBtnVisible() {
     return window.pageYOffset >= 100 && !pokemonDetailsOpen;
 }
+
+// ####################################### TOUCH CONTROLS #######################################
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
+};
+
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+        return;
+    }
+
+    let xUp = evt.touches[0].clientX;
+    let yUp = evt.touches[0].clientY;
+
+    let xDiff = xDown - xUp;
+    let yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+            document.getElementById('next-pokemon-right-btn').click();
+        } else {
+            document.getElementById('next-pokemon-left-btn').click();
+        }
+    } else {
+        if (yDiff > 0) {
+            // Swipe down
+        } else {
+            // Swipe up
+        }
+    }
+
+    // Reset values
+    xDown = null;
+    yDown = null;
+};
 
 // ####################################### POKEMON PROPERTIES #######################################
 
