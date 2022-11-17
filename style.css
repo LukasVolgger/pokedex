@@ -287,6 +287,28 @@ nav {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.nav-btn {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+}
+
+.nav-btn img {
+    width: 56px;
+    object-fit: contain;
+    transform: translate(-50% -50%);
+}
+
+.nav-btn-left {
+    top: 50%;
+    left: -25%;
+}
+
+.nav-btn-right {
+    top: 50%;
+    right: -25%;
+}
+
 .pagination-footer {
     display: flex;
     justify-content: center;
@@ -301,6 +323,7 @@ nav {
 }
 
 .pokemon-details-card {
+    position: relative;
     width: 50vw;
     max-width: 500px;
     max-height: 580px;
@@ -334,7 +357,8 @@ nav {
 }
 
 .close-details-btn:hover,
-.favorite-btn:hover {
+.favorite-btn:hover,
+.nav-btn:hover {
     filter: brightness(0) saturate(100%) invert(73%) sepia(85%) saturate(652%) hue-rotate(352deg) brightness(101%) contrast(104%);
     transform: scale(1.05);
 }

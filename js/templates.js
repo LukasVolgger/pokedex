@@ -32,6 +32,7 @@ function generatePokedexCardHTML(array, i) {
 function generatePokemonDetailsCardHTML(array, i) {
     return `
         <div class="pokemon-details-card" onclick="event.stopPropagation()">
+        <button class="nav-btn nav-btn-left btn"><img src="./assets/img/icons/arrow_left.svg" alt="Arrow Left" title="Left!"></button>
             <div class="pokemon-details-header">
                 <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close!">
                     <img src="./assets/img/icons/close.svg" alt="Close">
@@ -103,6 +104,7 @@ function generatePokemonDetailsCardHTML(array, i) {
                     <span class="pokemon-properties ${getPokemonAbilities(array, i, 2)}">/ ${getPokemonAbilities(array, i, 2)}</span>
                 </div>
             </div>
+            <button class="nav-btn nav-btn-right btn"><img src="./assets/img/icons/arrow_right.svg" alt="Arrow Right" title="Right!"></button>
         </div>
     `;
 }
