@@ -31,7 +31,7 @@ function generatePokedexCardHTML(array, i) {
  */
 function generatePokemonDetailsCardHTML(array, i) {
     return `
-        <div class="pokemon-details-card">
+        <div class="pokemon-details-card" onclick="event.stopPropagation()">
             <div class="pokemon-details-header">
                 <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close!">
                     <img src="./assets/img/icons/close.svg" alt="Close">
