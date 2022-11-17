@@ -472,6 +472,14 @@ window.addEventListener('keydown', (e) => {
     if (e.key == 'Escape') {
         closePokemonDetails();
     }
+
+    if (e.key == 'ArrowLeft') {
+        document.getElementById('next-pokemon-left-btn').click();
+    }
+
+    if (e.key == 'ArrowRight') {
+        document.getElementById('next-pokemon-right-btn').click();
+    }
 });
 
 /**
