@@ -289,24 +289,25 @@ nav {
 
 .nav-btn {
     position: absolute;
+    z-index: 1;
     background-color: transparent;
     border: none;
 }
 
 .nav-btn img {
-    width: 56px;
+    width: 48px;
     object-fit: contain;
     transform: translate(-50% -50%);
 }
 
 .nav-btn-left {
-    top: 50%;
-    left: -25%;
+    top: 38%;
+    left: 0%;
 }
 
 .nav-btn-right {
-    top: 50%;
-    right: -25%;
+    top: 38%;
+    right: 0%;
 }
 
 .pagination-footer {

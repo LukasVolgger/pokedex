@@ -175,7 +175,10 @@ function showLoadingScreen() {
  */
 function hideLoadingScreen() {
     document.getElementById('loading-screen').classList.add('d-none');
-    document.body.style = 'overflow: auto';
+
+    if (!pokemonDetailsOpen) { // Needed for navigating through the Pokémon when more are loaded
+        document.body.style = 'overflow: auto';
+    }
 }
 
 // ####################################### MAIN #######################################
@@ -238,7 +241,7 @@ function renderPokemon(array) {
 /**
  * Opens the clicked Pokémon and shows its details
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon (to be opened)
+ * @param {number} index The index of the current Pokémon (to be opened)
  */
 function showPokemonDetails(array, index) {
     pokemonDetailsOpen = true;
@@ -250,6 +253,46 @@ function showPokemonDetails(array, index) {
     let container = document.getElementById('pokemon-details-container');
     container.classList.remove('d-none');
     container.innerHTML = generatePokemonDetailsCardHTML(array, index);
+}
+
+/**
+ * Opens the previous Pokémon
+ * @param {*} array The array with the Pokémon
+ * @param {*} index The index of the current Pokémon
+ */
+function nextPokemonLeft(array, index) {
+    if (array == loadedPokemon) {
+        if (index > 0) {
+            showPokemonDetails(loadedPokemon, index - 1);
+        }
+    } else if (array == favoritePokemon) {
+        if (index > 0) {
+            showPokemonDetails(favoritePokemon, index - 1);
+        }
+    }
+}
+
+/**
+ * Opens the next Pokémon
+ * @param {*} array The array with the Pokémon
+ * @param {*} index The index of the current Pokémon
+ */
+function nextPokemonRight(array, index) {
+    if (array == loadedPokemon) {
+        if (index < loadedPokemon.length - 1) {
+            showPokemonDetails(loadedPokemon, index + 1);
+        } else {
+            loadMorePokemon();
+            showPokemonDetails(loadedPokemon, index);
+        }
+    } else if (array == favoritePokemon) {
+        if (index < favoritePokemon.length - 1) {
+            showPokemonDetails(favoritePokemon, index + 1);
+        } else {
+            loadMorePokemon();
+            showPokemonDetails(favoritePokemon, index);
+        }
+    }
 }
 
 /**
@@ -272,7 +315,7 @@ function closePokemonDetails() {
 /**
  * Sets a Pokémon as a favorite for the user and stores it in the localStorage
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @param {number} pokemonID The ID of the saved Pokémon
  */
 function setFavoritePokemon(array, index, pokemonID) {
@@ -453,7 +496,7 @@ function upBtnVisible() {
 /**
  * Returns the properties of the Pokémon based on the passed property as a string
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @param {string} property The property of the Pokémon ('height', 'weight')
  * @returns The properties of the Pokémon as a number (height/weight)
  */
@@ -464,7 +507,7 @@ function getPokemonProperties(array, index, property) {
 /**
  * Returns the ID of the Pokémon
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @returns The ID of the Pokémon
  */
 function getPokemonID(array, index) {
@@ -474,7 +517,7 @@ function getPokemonID(array, index) {
 /**
  * Returns the name of the Pokémon
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon 
+ * @param {number} index The index of the current Pokémon 
  * @returns The name of the Pokémon as string
  */
 function getPokemonName(array, index) {
@@ -488,7 +531,7 @@ function getPokemonName(array, index) {
 /**
  * Returns the URL of the image of the respective Pokémon
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon 
+ * @param {number} index The index of the current Pokémon 
  * @returns The URL of the image 
  */
 function getPokemonImg(array, index) {
@@ -502,7 +545,7 @@ function getPokemonImg(array, index) {
 /**
  * Returns the type of the Pokémon as a string
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @param {number} typeIndex The index of the type. Each Pokémon has either 1 or 2 types
  * @returns The types of the Pokémon as a string
  */
@@ -519,7 +562,7 @@ function getPokemonType(array, index, typeIndex) {
 /**
  * Returns the name of the Pokémon's statistics
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @param {number} stat The index of the statistic. Each Pokémon has 6 statistics
  * @returns The name of the Pokémon's statistics as string
  */
@@ -530,7 +573,7 @@ function getPokemonStat(array, index, stat) {
 /**
  * Returns the value of the statistic of the respective Pokémon as number
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @param {number} stat The index of the statistic. Each Pokémon has 6 statistics
  * @returns The value of the statistic of the Pokémon as number
  */
@@ -627,7 +670,7 @@ function getPokemonTypeHexColor(type) {
 /**
  * Returns the Pokémon's ability as a string
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @param {number} abilityIndex The index of the ability
  * @returns The Pokémon's ability as a string
  */
@@ -644,7 +687,7 @@ function getPokemonAbilities(array, index, abilityIndex) {
 /**
  * Check if the Pokemon has been favored and if so, fill in the Fav-Star
  * @param {Array} array The array with the Pokémon
- * @param {number} index The current Pokémon
+ * @param {number} index The index of the current Pokémon
  * @returns The URL of the image with the favorite star (Either filled or not)
  */
 function getPokemonFavoriteState(array, index) {
